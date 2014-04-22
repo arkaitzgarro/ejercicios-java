@@ -12,7 +12,7 @@ public class EJ4_01 {
 	 */
 	public static void main(String[] args) {
 		int[] numeros;
-		int max;
+		int max, min;
 		
 		numeros = new int[10];
 		// Inicializar el array de nœmeros
@@ -30,6 +30,15 @@ public class EJ4_01 {
 		}
 		
 		System.out.println("El m‡ximo es: " + max);
+		
+		min = Integer.MAX_VALUE;
+		// Calcular el m‡ximo
+		for (int i = 0; i < numeros.length; i++) {
+			if(numeros[i] < min) 
+				min = numeros[i];
+		}
+		
+		System.out.println("El m’nimo es: " + min);
 	}
 
 }
