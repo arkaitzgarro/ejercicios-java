@@ -15,8 +15,10 @@ public class EJ3_08 {
 	 */
 	public static void main(String[] args) {
 		boolean acertado = false;
-		int intentos = 5, num;
-		int x  = (int) (100*Math.random()+1);
+		int intentos = 5;
+		short num, x;
+		
+		x  = (short) (100*Math.random()+1);
 		
 		// Declarar punto de entrada
 		Scanner entrada = new Scanner(System.in);
@@ -25,7 +27,7 @@ public class EJ3_08 {
 			System.out.println("Te quedan "+intentos+" intentos");
 			System.out.print("Introduce el numero a adivinar: ");
 			
-			num = entrada.nextInt();
+			num = entrada.nextShort();
 			
 			intentos--;
 			
