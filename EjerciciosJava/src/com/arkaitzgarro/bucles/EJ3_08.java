@@ -41,7 +41,7 @@ public class EJ3_08 {
 		} while(intentos > 0 && !acertado);
 		
 		if(acertado)
-			System.out.println("Enhorabuena! Has acertado al " + (intentos-1) + " intento.");
+			System.out.println("Enhorabuena! Has acertado!");
 		else
 			System.out.println("Lo siento, no has acertado. El número era: " + x);
 
