@@ -2,14 +2,14 @@ package com.arkaitzgarro.funciones;
 
 import java.util.ArrayList;
 
-public abstract class EJ5_03_Abstract {
+public final class EJ5_03_Final {
 	
 	/**
 	 * Devuelve un array con nœmeros divisores primos de n
 	 * @param n
 	 * @return
 	 */
-	public final static Integer[] divisoresPrimos(int n) {
+	public static Integer[] divisoresPrimos(int n) {
 		Integer[] array;
 		ArrayList<Integer> primos = new ArrayList<Integer>();
 		
@@ -28,7 +28,7 @@ public abstract class EJ5_03_Abstract {
 	 * @param n
 	 * @return
 	 */
-	private final static boolean esPrimo(int n) {
+	private static boolean esPrimo(int n) {
 		int cont = 2;
 		boolean primo = true;
 
