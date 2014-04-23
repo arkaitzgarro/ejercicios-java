@@ -53,6 +53,8 @@ public class EJ4_04 {
 		for (int i = 0; i < v3.length; i++) {
 			System.out.print(v3[i] + " ");
 		}
+		
+		// System.out.println(Arrays.toString(v3));
 
 	}
 

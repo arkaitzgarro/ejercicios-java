@@ -21,13 +21,6 @@ public class EJ4_02 {
 		}
 		
 		// System.out.println(Arrays.toString(numeros));
-		
-		// Crear un array capicua
-//		numeros[0] = numeros[9] = 1;
-//		numeros[1] = numeros[8] = 2;
-//		numeros[2] = numeros[7] = 3;
-//		numeros[3] = numeros[6] = 4;
-//		numeros[4] = numeros[5] = 5;
 
 		ini = 0;
 		fin = numeros.length - 1;
