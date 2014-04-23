@@ -39,6 +39,11 @@ public class EJ4_01 {
 		}
 		
 		System.out.println("El m’nimo es: " + min);
+		
+		Arrays.sort(numeros);
+		System.out.println("El minimo es: " + numeros[0]);
+		System.out.println("El maximo es: " + numeros[numeros.length - 1]);
+		
 	}
 
 }
