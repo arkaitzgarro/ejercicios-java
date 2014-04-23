@@ -21,6 +21,7 @@ public class PruebaComplejo {
 		c3 = Complejo.sumar(c1, c2);
 		System.out.println(c3.toString());
 
+		System.out.println("Nœmero de instancias: " + Complejo.getNumInstancias());
 	}
 
 }

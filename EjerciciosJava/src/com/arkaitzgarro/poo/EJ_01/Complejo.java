@@ -7,13 +7,20 @@ public class Complejo {
 	
 	// Parte imaginaria
 	private double pImag;
+	
+	// Nœmero de instancias
+	private static int instancias = 0;
 
 	public Complejo() {
 		this.pReal = 1.0;
 		this.pImag = 1.0;
+		
+		instancias++;
 	}
 
 	public Complejo(double pReal, double pImag) {
+		this();
+		
 		this.pReal = pReal;
 		this.pImag = pImag;
 	}
@@ -26,7 +33,6 @@ public class Complejo {
 	}
 
 	public void sumar(Complejo c) {
-		// this.pReal += c.pReal;
 		this.pReal += c.getPReal();
 		this.pImag += c.getPImag();
 	}
@@ -53,6 +59,10 @@ public class Complejo {
 
 	public void setPImag(double pImag) {
 		this.pImag = pImag;
+	}
+	
+	public static int getNumInstancias() {
+		return instancias;
 	}
 	
 	@Override
