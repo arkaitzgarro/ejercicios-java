@@ -8,9 +8,6 @@ import com.arkaitzgarro.validator.Fizz;
 
 public class FizzBuzz {
 	
-	Fizz f = new Fizz();
-	Buzz b = new Buzz();
-	
 	ArrayList<IValidator> validators = new ArrayList<IValidator>();
 	
 	/**
