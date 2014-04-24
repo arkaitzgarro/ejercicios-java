@@ -1,6 +1,12 @@
 package com.arkaitzgarro.fizzbuzz;
 
+import com.arkaitzgarro.validator.Buzz;
+import com.arkaitzgarro.validator.Fizz;
+
 public class FizzBuzz {
+	
+	Fizz f = new Fizz();
+	Buzz b = new Buzz();
 	
 	public String print(int num) {
 		StringBuffer str = new StringBuffer();
@@ -16,14 +22,20 @@ public class FizzBuzz {
 	}
 	
 	public String testNumber(int num) {
-		if((num % 3 == 0) && (num % 5 == 0)) {
-			return "FizzBuzz";
-		} else if(num % 3 == 0) {
-			return "Fizz";
-		} else if(num % 5 == 0) {
-			return "Buzz";
-		} else {
-			return String.valueOf(num);
+		StringBuffer str = new StringBuffer();
+		
+		if(f.validate(num)) {
+			str.append(f.getOutput());
 		}
+		
+		if(b.validate(num)) {
+			str.append(b.getOutput());
+		}
+		
+		if(str.length() == 0) {
+			str.append(String.valueOf(num));
+		}
+		
+		return str.toString();
 	}
 }

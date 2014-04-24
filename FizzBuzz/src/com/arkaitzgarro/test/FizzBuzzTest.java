@@ -1,19 +1,53 @@
 package com.arkaitzgarro.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.arkaitzgarro.fizzbuzz.FizzBuzz;
+import com.arkaitzgarro.validator.Buzz;
+import com.arkaitzgarro.validator.Fizz;
 
 public class FizzBuzzTest {
 
 	FizzBuzz fb;
+	Fizz f;
+	Buzz b;
 	
 	@Before
 	public void setUp() throws Exception {
 		fb = new FizzBuzz();
+		f = new Fizz();
+		b = new Buzz();
+	}
+	
+	@Test
+	public void testFizz() {
+		assertEquals("Fizz", "Fizz", f.getOutput());
+		
+		assertTrue(f.validate(3));
+		assertTrue(f.validate(6));
+		assertTrue(f.validate(9));
+		assertTrue(f.validate(15));
+		assertFalse(f.validate(1));
+		assertFalse(f.validate(2));
+		assertFalse(f.validate(5));
+		assertFalse(f.validate(7));
+	}
+	
+	@Test
+	public void testBuzz() {
+		assertEquals("Buzz", "Buzz", b.getOutput());
+		
+		assertTrue(b.validate(5));
+		assertTrue(b.validate(10));
+		assertTrue(b.validate(15));
+		assertTrue(b.validate(30));
+		assertFalse(b.validate(1));
+		assertFalse(b.validate(2));
+		assertFalse(b.validate(3));
+		assertFalse(b.validate(7));
 	}
 
 	@Test
