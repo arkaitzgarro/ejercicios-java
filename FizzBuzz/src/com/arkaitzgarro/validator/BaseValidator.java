@@ -4,7 +4,7 @@ import com.arkaitzgarro.interfaces.IValidator;
 
 public abstract class BaseValidator implements IValidator {
 
-	String output;
+	protected String output;
 	
 	@Override
 	public abstract boolean validate(int num);

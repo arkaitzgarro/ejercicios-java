@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.arkaitzgarro.factories.ValidatorFactory;
 import com.arkaitzgarro.fizzbuzz.FizzBuzz;
 import com.arkaitzgarro.interfaces.IValidator;
 import com.arkaitzgarro.validator.Buzz;
@@ -19,8 +20,8 @@ public class FizzBuzzTest {
 	@Before
 	public void setUp() throws Exception {
 		fb = new FizzBuzz();
-		f = new Fizz();
-		b = new Buzz();
+		f = ValidatorFactory.getFizzValidator();
+		b = ValidatorFactory.getBuzzValidator();
 		
 		fb.addValidator(f);
 		fb.addValidator(b);
