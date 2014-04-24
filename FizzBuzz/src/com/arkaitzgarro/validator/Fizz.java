@@ -1,6 +1,8 @@
 package com.arkaitzgarro.validator;
 
-public class Fizz {
+import com.arkaitzgarro.interfaces.IValidator;
+
+public class Fizz extends BaseValidator implements IValidator {
 	private final String output = "Fizz";
 	
 	public boolean validate(int num) {

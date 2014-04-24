@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.arkaitzgarro.fizzbuzz.FizzBuzz;
+import com.arkaitzgarro.interfaces.IValidator;
 import com.arkaitzgarro.validator.Buzz;
 import com.arkaitzgarro.validator.Fizz;
 
@@ -20,10 +21,14 @@ public class FizzBuzzTest {
 		fb = new FizzBuzz();
 		f = new Fizz();
 		b = new Buzz();
+		
+		fb.addValidator(f);
+		fb.addValidator(b);
 	}
 	
 	@Test
 	public void testFizz() {
+		assertTrue(f instanceof IValidator);
 		assertEquals("Fizz", "Fizz", f.getOutput());
 		
 		assertTrue(f.validate(3));
@@ -38,6 +43,7 @@ public class FizzBuzzTest {
 	
 	@Test
 	public void testBuzz() {
+		assertTrue(b instanceof IValidator);
 		assertEquals("Buzz", "Buzz", b.getOutput());
 		
 		assertTrue(b.validate(5));
