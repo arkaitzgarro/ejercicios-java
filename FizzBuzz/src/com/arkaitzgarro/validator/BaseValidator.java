@@ -14,8 +14,8 @@ public abstract class BaseValidator implements IValidator {
 		return this.output;
 	}
 	
+	@Override
 	public void setOutput(String output) {
 		this.output = output;
 	}
-
 }
