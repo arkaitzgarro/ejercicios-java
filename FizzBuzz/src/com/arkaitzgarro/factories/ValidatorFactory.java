@@ -2,6 +2,7 @@ package com.arkaitzgarro.factories;
 
 import com.arkaitzgarro.validator.Buzz;
 import com.arkaitzgarro.validator.Fizz;
+import com.arkaitzgarro.validator.Mozz;
 
 public abstract class ValidatorFactory {
 
@@ -17,5 +18,12 @@ public abstract class ValidatorFactory {
 		b.setOutput("Buzz");
 		
 		return b;
+	}
+	
+	public static final Mozz getMozzValidator() {
+		Mozz m = new Mozz();
+		m.setOutput("Mozz");
+		
+		return m;
 	}
 }

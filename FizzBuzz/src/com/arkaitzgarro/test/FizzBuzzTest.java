@@ -1,6 +1,8 @@
 package com.arkaitzgarro.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,21 +12,25 @@ import com.arkaitzgarro.fizzbuzz.FizzBuzz;
 import com.arkaitzgarro.interfaces.IValidator;
 import com.arkaitzgarro.validator.Buzz;
 import com.arkaitzgarro.validator.Fizz;
+import com.arkaitzgarro.validator.Mozz;
 
 public class FizzBuzzTest {
 
 	FizzBuzz fb;
 	Fizz f;
 	Buzz b;
+	Mozz m;
 	
 	@Before
 	public void setUp() throws Exception {
 		fb = new FizzBuzz();
 		f = ValidatorFactory.getFizzValidator();
 		b = ValidatorFactory.getBuzzValidator();
+		m = ValidatorFactory.getMozzValidator();
 		
 		fb.addValidator(f);
 		fb.addValidator(b);
+		fb.addValidator(m);
 	}
 	
 	@Test
@@ -64,7 +70,7 @@ public class FizzBuzzTest {
 		assertEquals("FizzBuzz 3", "Fizz", fb.testNumber(3));
 		assertEquals("FizzBuzz 4", "4", fb.testNumber(4));
 		assertEquals("FizzBuzz 5", "Buzz", fb.testNumber(5));
-		assertEquals("FizzBuzz 7", "7", fb.testNumber(7));
+		assertEquals("FizzBuzz 7", "Mozz", fb.testNumber(7));
 		assertEquals("FizzBuzz 9", "Fizz", fb.testNumber(9));
 		assertEquals("FizzBuzz 10", "Buzz", fb.testNumber(10));
 		assertEquals("FizzBuzz 15", "FizzBuzz", fb.testNumber(15));
@@ -77,8 +83,8 @@ public class FizzBuzzTest {
 		assertEquals("FizzBuzz 3", "1 2 Fizz", fb.print(3));
 		assertEquals("FizzBuzz 4", "1 2 Fizz 4", fb.print(4));
 		assertEquals("FizzBuzz 5", "1 2 Fizz 4 Buzz", fb.print(5));
-		assertEquals("FizzBuzz 7", "1 2 Fizz 4 Buzz Fizz 7", fb.print(7));
-		assertEquals("FizzBuzz 15", "1 2 Fizz 4 Buzz Fizz 7 8 Fizz Buzz 11 Fizz 13 14 FizzBuzz", fb.print(15));
+		assertEquals("FizzBuzz 7", "1 2 Fizz 4 Buzz Fizz Mozz", fb.print(7));
+		assertEquals("FizzBuzz 15", "1 2 Fizz 4 Buzz Fizz Mozz 8 Fizz Buzz 11 Fizz 13 Mozz FizzBuzz", fb.print(15));
 	}
 
 }
