@@ -2,6 +2,7 @@ package com.arkaitzgarro.fizzbuzz;
 
 import java.util.ArrayList;
 
+import com.arkaitzgarro.exception.NumberNotValidException;
 import com.arkaitzgarro.interfaces.IValidator;
 import com.arkaitzgarro.validator.Fizz;
 
@@ -38,8 +39,13 @@ public class FizzBuzz {
 		StringBuffer str = new StringBuffer();
 		
 		for(IValidator v : this.validators) {
-			if(v.validate(num)) {
-				str.append(v.getOutput());
+			try {
+				if(v.validate(num)) {
+					str.append(v.getOutput());
+				}
+			} catch (NumberNotValidException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
