@@ -3,7 +3,6 @@ package com.arkaitzgarro.fizzbuzz;
 import java.util.ArrayList;
 
 import com.arkaitzgarro.interfaces.IValidator;
-import com.arkaitzgarro.validator.Buzz;
 import com.arkaitzgarro.validator.Fizz;
 
 public class FizzBuzz {
