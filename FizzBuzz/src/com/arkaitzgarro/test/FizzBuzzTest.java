@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.arkaitzgarro.exception.NumberNotValidException;
 import com.arkaitzgarro.factories.ValidatorFactory;
 import com.arkaitzgarro.fizzbuzz.FizzBuzz;
 import com.arkaitzgarro.interfaces.IValidator;
@@ -38,14 +39,25 @@ public class FizzBuzzTest {
 		assertTrue(f instanceof IValidator);
 		assertEquals("Fizz", "Fizz", f.getOutput());
 		
-		assertTrue(f.validate(3));
-		assertTrue(f.validate(6));
-		assertTrue(f.validate(9));
-		assertTrue(f.validate(15));
-		assertFalse(f.validate(1));
-		assertFalse(f.validate(2));
-		assertFalse(f.validate(5));
-		assertFalse(f.validate(7));
+		try {
+			assertTrue(f.validate(3));
+			assertTrue(f.validate(6));
+			assertTrue(f.validate(9));
+			assertTrue(f.validate(15));
+			assertFalse(f.validate(1));
+			assertFalse(f.validate(2));
+			assertFalse(f.validate(5));
+			assertFalse(f.validate(7));
+		} catch (NumberNotValidException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertTrue(f.validate(0));
+		} catch(NumberNotValidException e) {
+			assertTrue(e instanceof NumberNotValidException);
+		}
 	}
 	
 	@Test
@@ -53,14 +65,25 @@ public class FizzBuzzTest {
 		assertTrue(b instanceof IValidator);
 		assertEquals("Buzz", "Buzz", b.getOutput());
 		
-		assertTrue(b.validate(5));
-		assertTrue(b.validate(10));
-		assertTrue(b.validate(15));
-		assertTrue(b.validate(30));
-		assertFalse(b.validate(1));
-		assertFalse(b.validate(2));
-		assertFalse(b.validate(3));
-		assertFalse(b.validate(7));
+		try {
+			assertTrue(b.validate(5));
+			assertTrue(b.validate(10));
+			assertTrue(b.validate(15));
+			assertTrue(b.validate(30));
+			assertFalse(b.validate(1));
+			assertFalse(b.validate(2));
+			assertFalse(b.validate(3));
+			assertFalse(b.validate(7));
+		} catch (NumberNotValidException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertTrue(b.validate(0));
+		} catch(NumberNotValidException e) {
+			assertTrue(e instanceof NumberNotValidException);
+		}
 	}
 	
 	@Test
@@ -68,13 +91,24 @@ public class FizzBuzzTest {
 		assertTrue(m instanceof IValidator);
 		assertEquals("Mozz", "Mozz", m.getOutput());
 		
-		assertTrue(m.validate(7));
-		assertTrue(m.validate(14));
-		assertTrue(m.validate(21));
-		assertFalse(m.validate(1));
-		assertFalse(m.validate(2));
-		assertFalse(m.validate(3));
-		assertFalse(m.validate(5));
+		try {
+			assertTrue(m.validate(7));
+			assertTrue(m.validate(14));
+			assertTrue(m.validate(21));
+			assertFalse(m.validate(1));
+			assertFalse(m.validate(2));
+			assertFalse(m.validate(3));
+			assertFalse(m.validate(5));
+		} catch (NumberNotValidException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			assertTrue(m.validate(0));
+		} catch(NumberNotValidException e) {
+			assertTrue(e instanceof NumberNotValidException);
+		}
 	}
 
 	@Test
