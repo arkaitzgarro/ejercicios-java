@@ -23,11 +23,11 @@ public class FizzBuzzTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		fb = new FizzBuzz();
 		f = ValidatorFactory.getFizzValidator();
 		b = ValidatorFactory.getBuzzValidator();
 		m = ValidatorFactory.getMozzValidator();
 		
+		fb = new FizzBuzz();
 		fb.addValidator(f);
 		fb.addValidator(b);
 		fb.addValidator(m);
@@ -61,6 +61,20 @@ public class FizzBuzzTest {
 		assertFalse(b.validate(2));
 		assertFalse(b.validate(3));
 		assertFalse(b.validate(7));
+	}
+	
+	@Test
+	public void testMozz() {
+		assertTrue(m instanceof IValidator);
+		assertEquals("Mozz", "Mozz", m.getOutput());
+		
+		assertTrue(m.validate(7));
+		assertTrue(m.validate(14));
+		assertTrue(m.validate(21));
+		assertFalse(m.validate(1));
+		assertFalse(m.validate(2));
+		assertFalse(m.validate(3));
+		assertFalse(m.validate(5));
 	}
 
 	@Test
