@@ -10,8 +10,8 @@ import com.arkaitzgarro.factories.CompanyFactory;
 import com.arkaitzgarro.factories.EmployeeFactory;
 import com.arkaitzgarro.googleplex.Company;
 import com.arkaitzgarro.googleplex.Employee;
+import com.arkaitzgarro.googleplex.Executive;
 import com.arkaitzgarro.interfaces.IEmployee;
-import com.arkaitzgarro.interfaces.IExecutive;
 
 public class GooglePlexTest {
 	
@@ -50,8 +50,8 @@ public class GooglePlexTest {
 		assertEquals("Employee id.", 0, e.getEmployeeId());
 		assertEquals("Employee company.", null, e.getCompany());
 		
-		((Employee) e2).promote();
-		assertTrue(c.getEmployee(e2.getEmployeeId()) instanceof IExecutive);
+		e2.promote();
+		assertTrue(c.getEmployee(e2.getEmployeeId()) instanceof Executive);
 	}
 	
 	@Test

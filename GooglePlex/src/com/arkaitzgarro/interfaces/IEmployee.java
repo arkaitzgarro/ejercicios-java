@@ -9,4 +9,5 @@ public interface IEmployee {
 	public short getEmployeeId();
 	public void fire();
 	public ICompany getCompany();
+	public void promote();
 }
