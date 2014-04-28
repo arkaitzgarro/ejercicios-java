@@ -78,6 +78,6 @@ public class Employee implements IEmployee {
 	
 	public void promote() {
 		IExecutive executive = new Executive(this.company, this.name, this.salary, this.id);
-		executive.getCompany().setEmployee(executive, executive.getEmployeeId());
+		executive.getCompany().setEmployee(executive);
 	}
 }
