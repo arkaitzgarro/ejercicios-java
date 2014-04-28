@@ -32,9 +32,13 @@ public class Company implements ICompany {
 
 	@Override
 	public void fireEmploye(short id) {
+		if(this.employees.size() == 0) {
+			// TODO: lanzar una excepci—n
+		}
+		
 		IEmployee e = this.getEmployee(id);
 		
-		if(this.employees.contains(e)) {
+		if(e != null) {
 			this.employees.remove(e);
 			e.fire();
 		}
@@ -43,7 +47,7 @@ public class Company implements ICompany {
 	@Override
 	public IEmployee newEmployee(String name, float salary) {
 		if(this.employees.size() == this.size) {
-			// TODO
+			// TODO: lanzar una excepci—n
 		}
 		
 		IEmployee employee = new Employee(this, name, salary, ++counter);		
@@ -67,10 +71,10 @@ public class Company implements ICompany {
 		return (short)this.employees.size();
 	}
 	
-	public void setEmployee(IExecutive ex, short id) {
-		IEmployee e = this.getEmployee(id);
+	public void setEmployee(IExecutive ex) {
+		IEmployee e = this.getEmployee(ex.getEmployeeId());
 		
-		if(this.employees.contains(e)) {
+		if(e != null) {
 			this.employees.set(this.employees.indexOf(e), ex);
 		}
 	}

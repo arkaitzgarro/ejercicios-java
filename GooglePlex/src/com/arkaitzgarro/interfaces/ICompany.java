@@ -6,5 +6,5 @@ public interface ICompany {
 	public IEmployee getEmployee(short id);
 	public void fireEmploye(short id);
 	public IEmployee newEmployee(String name, float salary);
-	public void setEmployee(IExecutive ex, short id);
+	public void setEmployee(IExecutive ex);
 }
