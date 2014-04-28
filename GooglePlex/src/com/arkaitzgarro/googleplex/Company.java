@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.arkaitzgarro.interfaces.ICompany;
 import com.arkaitzgarro.interfaces.IEmployee;
+import com.arkaitzgarro.interfaces.IExecutive;
 
 public class Company implements ICompany {
 
@@ -63,10 +64,10 @@ public class Company implements ICompany {
 	}
 	
 	public short getNumEmployees() {
-		return counter;
+		return (short)this.employees.size();
 	}
 	
-	public void setEmployee(Executive ex, short id) {
+	public void setEmployee(IExecutive ex, short id) {
 		IEmployee e = this.getEmployee(id);
 		
 		if(this.employees.contains(e)) {

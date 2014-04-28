@@ -1,8 +1,9 @@
 package com.arkaitzgarro.googleplex;
 
 import com.arkaitzgarro.interfaces.ICompany;
+import com.arkaitzgarro.interfaces.IExecutive;
 
-public class Executive extends Employee {
+public class Executive extends Employee implements IExecutive {
 	
 	private float budget;
 

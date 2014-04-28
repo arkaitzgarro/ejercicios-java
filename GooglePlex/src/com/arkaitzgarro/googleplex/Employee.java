@@ -2,7 +2,7 @@ package com.arkaitzgarro.googleplex;
 
 import com.arkaitzgarro.interfaces.ICompany;
 import com.arkaitzgarro.interfaces.IEmployee;
-import com.arkaitzgarro.poo.EJ_06.Ejecutivo;
+import com.arkaitzgarro.interfaces.IExecutive;
 
 public class Employee implements IEmployee {
 	
@@ -77,7 +77,7 @@ public class Employee implements IEmployee {
 	}
 	
 	public void promote() {
-		Executive executive = new Executive(this.company, this.name, this.salary, this.id);
+		IExecutive executive = new Executive(this.company, this.name, this.salary, this.id);
 		executive.getCompany().setEmployee(executive, executive.getEmployeeId());
 	}
 }
