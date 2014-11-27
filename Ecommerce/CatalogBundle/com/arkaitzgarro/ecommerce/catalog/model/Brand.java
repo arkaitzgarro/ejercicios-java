@@ -6,7 +6,7 @@ import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
-public class Brand extends AbstractEntity implements IBrand {
+public class Brand extends AbstractEntity implements IBrand, Cloneable {
 	/**
 	 * Brand name
 	 */
@@ -116,4 +116,5 @@ public class Brand extends AbstractEntity implements IBrand {
 	public int getProductCount() {
 		return this.getProducts().size();
 	}
+
 }

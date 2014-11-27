@@ -50,7 +50,9 @@ public class CartTest {
 
 	@Test
 	public void testAddProduct() {
+		iphone.setPrice(600);
 		cart.addProduct(iphone, 5);
+
 		assertEquals(3000, cart.getTotalWithoutVAT(), 0);
 		assertEquals(3630, cart.getTotalWithVAT(), 0);
 
@@ -98,6 +100,8 @@ public class CartTest {
 
 		assertEquals(1, cart.getNumLines());
 		assertEquals(1, cart.getNumProducts());
+
+		iphone.setPrice(600);
 
 		assertEquals(600, cart.getTotalWithoutVAT(), 0);
 		assertEquals(726, cart.getTotalWithVAT(), 0);

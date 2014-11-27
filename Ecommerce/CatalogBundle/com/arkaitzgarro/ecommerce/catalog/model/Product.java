@@ -4,7 +4,7 @@ import com.arkaitzgarro.ecommerce.catalog.model.abstracts.AbstractPurchasable;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
 
-public class Product extends AbstractPurchasable implements IProduct {
+public class Product extends AbstractPurchasable implements IProduct, Cloneable {
 
 	/**
 	 * Stock
@@ -63,5 +63,23 @@ public class Product extends AbstractPurchasable implements IProduct {
 		return p.getName().equals(this.getName())
 				&& p.getBrandName().equals(this.getBrandName());
 
+	}
+
+	/**
+	 * Create a copy of this object
+	 */
+	public Product clone() {
+		Product obj = null;
+
+		try {
+			obj = (Product) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		obj.price = ((Money) obj.price).clone();
+
+		return obj;
 	}
 }

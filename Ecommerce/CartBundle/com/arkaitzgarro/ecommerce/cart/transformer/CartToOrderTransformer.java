@@ -7,6 +7,7 @@ import com.arkaitzgarro.ecommerce.cart.model.Cart;
 import com.arkaitzgarro.ecommerce.cart.model.Order;
 import com.arkaitzgarro.ecommerce.cart.model.OrderLine;
 import com.arkaitzgarro.ecommerce.cart.model.interfaces.ILine;
+import com.arkaitzgarro.ecommerce.catalog.model.Product;
 
 public abstract class CartToOrderTransformer {
 
@@ -18,8 +19,8 @@ public abstract class CartToOrderTransformer {
 		order.setReference("WEB/" + sdf.format(new Date()));
 
 		for (ILine line : cart.getLines()) {
-			OrderLine ol = new OrderLine(line.getProduct(), line.getQuantity(),
-					order);
+			OrderLine ol = new OrderLine(((Product) line.getProduct()).clone(),
+					line.getQuantity(), order);
 
 			order.addOrderLine(ol);
 		}
