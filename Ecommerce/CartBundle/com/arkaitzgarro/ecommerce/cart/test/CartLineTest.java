@@ -33,7 +33,7 @@ public class CartLineTest {
 
 	@Before
 	public void setUp() throws Exception {
-		cl = new CartLine(iphone, 5);
+		cl = new CartLine(iphone, 5, null);
 	}
 
 	@Test
