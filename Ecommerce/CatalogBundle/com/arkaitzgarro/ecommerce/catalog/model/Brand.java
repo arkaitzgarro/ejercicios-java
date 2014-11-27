@@ -3,7 +3,7 @@ package com.arkaitzgarro.ecommerce.catalog.model;
 import java.util.ArrayList;
 
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
-import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IPurchasable;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
 public class Brand extends AbstractEntity implements IBrand, Cloneable {
@@ -22,11 +22,11 @@ public class Brand extends AbstractEntity implements IBrand, Cloneable {
 	 */
 	private String description;
 
-	private ArrayList<IProduct> products;
+	private ArrayList<IPurchasable> products;
 
 	public Brand(String name) {
 		this.name = name;
-		this.products = new ArrayList<IProduct>();
+		this.products = new ArrayList<IPurchasable>();
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Brand extends AbstractEntity implements IBrand, Cloneable {
 	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#insertProduct(com.
 	 *      arkaitzgarro.ecommerce.catalog.model.Product)
 	 */
-	public void insertProduct(IProduct product) {
+	public void insertProduct(IPurchasable product) {
 		if (!this.getProducts().contains(product)) {
 			// Insert only if not exists
 			getProducts().add(product);
@@ -104,7 +104,7 @@ public class Brand extends AbstractEntity implements IBrand, Cloneable {
 	 * 
 	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#getProducts()
 	 */
-	public ArrayList<IProduct> getProducts() {
+	public ArrayList<IPurchasable> getProducts() {
 		return this.products;
 	}
 

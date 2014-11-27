@@ -1,6 +1,6 @@
 package com.arkaitzgarro.ecommerce.catalog.model.interfaces;
 
-public interface IProduct {
+public interface IPurchasable {
 
 	/**
 	 * Get product name

@@ -2,7 +2,7 @@ package com.arkaitzgarro.ecommerce.cart.model;
 
 import com.arkaitzgarro.ecommerce.cart.model.abstracts.AbstractLine;
 import com.arkaitzgarro.ecommerce.cart.model.interfaces.ILine;
-import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IPurchasable;
 
 public class CartLine extends AbstractLine implements ILine {
 
@@ -11,7 +11,7 @@ public class CartLine extends AbstractLine implements ILine {
 	 */
 	private Cart cart;
 
-	public CartLine(IProduct p, int quantity, Cart cart) {
+	public CartLine(IPurchasable p, int quantity, Cart cart) {
 		super(p, quantity);
 
 		this.setCart(cart);

@@ -30,7 +30,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#getName()
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#getName()
 	 */
 	public String getName() {
 		return name;
@@ -39,7 +39,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#setName(java.lang.String
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#setName(java.lang.String
 	 *      )
 	 */
 	public void setName(String name) {
@@ -49,7 +49,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#getBrand()
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#getBrand()
 	 */
 	public IBrand getBrand() {
 		return brand;
@@ -58,7 +58,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#setBrand(com.arkaitzgarro
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#setBrand(com.arkaitzgarro
 	 *      .ecommerce.catalog.model.interfaces.IBrand)
 	 */
 	public void setBrand(IBrand brand) {
@@ -68,7 +68,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#getPrice()
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#getPrice()
 	 */
 	public IMoney getPrice() {
 		return this.price;
@@ -77,7 +77,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#getPriceWithoutVAT()
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#getPriceWithoutVAT()
 	 */
 	public IMoney getPriceWithoutVAT() {
 		return this.getPrice();
@@ -86,7 +86,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#getPriceWithVAT()
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#getPriceWithVAT()
 	 */
 	public IMoney getPriceWithVAT() {
 		return this.price.calculateWithTax(this.VAT);
@@ -95,7 +95,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#setPrice(float)
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#setPrice(float)
 	 */
 	public void setPrice(float ammount) {
 		this.getPrice().setAmmount(ammount);
@@ -104,7 +104,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#setPrice(com.arkaitzgarro
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#setPrice(com.arkaitzgarro
 	 *      .ecommerce.catalog.model.interfaces.IMoney)
 	 */
 	public void setPrice(IMoney price) {
@@ -114,7 +114,7 @@ public abstract class AbstractPurchasable extends AbstractEntity {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#getBrandName()
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#getBrandName()
 	 */
 	public String getBrandName() {
 		return this.getBrand().getName();

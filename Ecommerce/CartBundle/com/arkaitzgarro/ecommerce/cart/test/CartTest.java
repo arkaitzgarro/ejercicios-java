@@ -16,11 +16,11 @@ import com.arkaitzgarro.ecommerce.catalog.model.Product;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.ICurrency;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IMoney;
-import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IPurchasable;
 
 public class CartTest {
 
-	static IProduct iphone, nexus;
+	static IPurchasable iphone, nexus;
 	static IMoney price;
 	static ICurrency euro;
 	static IBrand apple, google;

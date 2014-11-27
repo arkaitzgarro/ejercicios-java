@@ -2,9 +2,10 @@ package com.arkaitzgarro.ecommerce.catalog.model;
 
 import com.arkaitzgarro.ecommerce.catalog.model.abstracts.AbstractPurchasable;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
-import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IPurchasable;
 
-public class Product extends AbstractPurchasable implements IProduct, Cloneable {
+public class Product extends AbstractPurchasable implements IPurchasable,
+		Cloneable {
 
 	/**
 	 * Stock
@@ -29,7 +30,7 @@ public class Product extends AbstractPurchasable implements IProduct, Cloneable 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#getStock()
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#getStock()
 	 */
 	public int getStock() {
 		return stock;
@@ -38,7 +39,7 @@ public class Product extends AbstractPurchasable implements IProduct, Cloneable 
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#setStock(int)
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IPurchasable#setStock(int)
 	 */
 	public void setStock(int stock) {
 		this.stock = (stock < 0) ? 0 : stock;

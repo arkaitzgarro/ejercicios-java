@@ -3,7 +3,7 @@ package com.arkaitzgarro.ecommerce.cart.model.abstracts;
 import java.util.ArrayList;
 
 import com.arkaitzgarro.ecommerce.cart.model.interfaces.ILine;
-import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IPurchasable;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
 public abstract class AbstractBasket extends AbstractEntity {
@@ -20,7 +20,7 @@ public abstract class AbstractBasket extends AbstractEntity {
 	 * @param p
 	 * @return
 	 */
-	protected ILine findAbstractLine(IProduct p) {
+	protected ILine findAbstractLine(IPurchasable p) {
 		for (ILine abstractLine : lines) {
 			if (abstractLine.getProduct().equals(p)) {
 				return abstractLine;
