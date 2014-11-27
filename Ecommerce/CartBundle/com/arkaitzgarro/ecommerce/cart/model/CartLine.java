@@ -5,8 +5,30 @@ import com.arkaitzgarro.ecommerce.catalog.model.Product;
 
 public class CartLine extends AbstractLine {
 
-	public CartLine(Product p, int quantity) {
+	/**
+	 * My cart
+	 */
+	private Cart cart;
+
+	public CartLine(Product p, int quantity, Cart cart) {
 		super(p, quantity);
+
+		this.setCart(cart);
+	}
+
+	/**
+	 * @return the cart
+	 */
+	public Cart getCart() {
+		return cart;
+	}
+
+	/**
+	 * @param cart
+	 *            the cart to set
+	 */
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
 }
