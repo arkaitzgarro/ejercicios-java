@@ -1,7 +1,7 @@
 package com.arkaitzgarro.ecommerce.cart.model.abstracts;
 
 import com.arkaitzgarro.ecommerce.cart.model.interfaces.ILine;
-import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IPurchasable;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
 public abstract class AbstractLine extends AbstractEntity {
@@ -9,14 +9,14 @@ public abstract class AbstractLine extends AbstractEntity {
 	/**
 	 * Product
 	 */
-	private IProduct product;
+	private IPurchasable product;
 
 	/**
 	 * Quantity
 	 */
 	private int quantity;
 
-	public AbstractLine(IProduct product, int quantity) {
+	public AbstractLine(IPurchasable product, int quantity) {
 		this.product = product;
 		this.setQuantity(quantity);
 	}
@@ -26,7 +26,7 @@ public abstract class AbstractLine extends AbstractEntity {
 	 * 
 	 * @see com.arkaitzgarro.ecommerce.cart.model.abstracts.ILine#getProduct()
 	 */
-	public IProduct getProduct() {
+	public IPurchasable getProduct() {
 		return product;
 	}
 
@@ -37,7 +37,7 @@ public abstract class AbstractLine extends AbstractEntity {
 	 * com.arkaitzgarro.ecommerce.cart.model.abstracts.ILine#setProduct(com.
 	 * arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct)
 	 */
-	public void setProduct(IProduct product) {
+	public void setProduct(IPurchasable product) {
 		this.product = product;
 	}
 

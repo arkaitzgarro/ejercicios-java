@@ -40,14 +40,14 @@ public interface IBrand {
 	 * 
 	 * @param product
 	 */
-	public void insertProduct(IProduct product);
+	public void insertProduct(IPurchasable product);
 
 	/**
 	 * Gell all products for this brand
 	 * 
 	 * @return Product list
 	 */
-	public Iterable<IProduct> getProducts();
+	public Iterable<IPurchasable> getProducts();
 
 	/**
 	 * Get the number of this products for this brand

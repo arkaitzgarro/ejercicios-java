@@ -12,11 +12,11 @@ import com.arkaitzgarro.ecommerce.catalog.model.Product;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.ICurrency;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IMoney;
-import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IPurchasable;
 
 public class ProductTest {
 
-	IProduct p;
+	IPurchasable p;
 	IMoney precio;
 	ICurrency euro;
 	IBrand apple;

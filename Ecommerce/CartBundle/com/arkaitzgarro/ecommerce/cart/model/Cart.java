@@ -2,7 +2,7 @@ package com.arkaitzgarro.ecommerce.cart.model;
 
 import com.arkaitzgarro.ecommerce.cart.model.abstracts.AbstractBasket;
 import com.arkaitzgarro.ecommerce.cart.model.interfaces.IBasket;
-import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IPurchasable;
 
 public class Cart extends AbstractBasket implements IBasket {
 
@@ -16,7 +16,7 @@ public class Cart extends AbstractBasket implements IBasket {
 	 * @param p
 	 * @param quantity
 	 */
-	public void addProduct(IProduct p, int quantity) {
+	public void addProduct(IPurchasable p, int quantity) {
 		CartLine cl = (CartLine) findAbstractLine(p);
 
 		if (cl == null) {
@@ -33,7 +33,7 @@ public class Cart extends AbstractBasket implements IBasket {
 	 * @param p
 	 * @param quantity
 	 */
-	public void updateQuantity(IProduct p, int quantity) {
+	public void updateQuantity(IPurchasable p, int quantity) {
 		CartLine cl = (CartLine) findAbstractLine(p);
 
 		if (cl != null) {
@@ -59,7 +59,7 @@ public class Cart extends AbstractBasket implements IBasket {
 	 * 
 	 * @param p
 	 */
-	public void removeProduct(IProduct p) {
+	public void removeProduct(IPurchasable p) {
 		getLines().remove((CartLine) findAbstractLine(p));
 	}
 

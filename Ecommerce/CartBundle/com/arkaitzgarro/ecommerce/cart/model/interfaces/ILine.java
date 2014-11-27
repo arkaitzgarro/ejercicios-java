@@ -1,19 +1,19 @@
 package com.arkaitzgarro.ecommerce.cart.model.interfaces;
 
-import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IPurchasable;
 
 public interface ILine {
 
 	/**
 	 * @return the product
 	 */
-	public IProduct getProduct();
+	public IPurchasable getProduct();
 
 	/**
 	 * @param product
 	 *            the product to set
 	 */
-	public void setProduct(IProduct product);
+	public void setProduct(IPurchasable product);
 
 	/**
 	 * @return the quantity
