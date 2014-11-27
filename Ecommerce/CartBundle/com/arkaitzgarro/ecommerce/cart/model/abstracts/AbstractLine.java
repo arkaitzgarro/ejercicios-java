@@ -1,6 +1,7 @@
 package com.arkaitzgarro.ecommerce.cart.model.abstracts;
 
-import com.arkaitzgarro.ecommerce.catalog.model.Product;
+import com.arkaitzgarro.ecommerce.cart.model.interfaces.ILine;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
 public abstract class AbstractLine extends AbstractEntity {
@@ -8,61 +9,73 @@ public abstract class AbstractLine extends AbstractEntity {
 	/**
 	 * Product
 	 */
-	private Product product;
+	private IProduct product;
 
 	/**
 	 * Quantity
 	 */
 	private int quantity;
 
-	public AbstractLine(Product product, int quantity) {
+	public AbstractLine(IProduct product, int quantity) {
 		this.product = product;
 		this.setQuantity(quantity);
 	}
 
-	/**
-	 * @return the product
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.cart.model.abstracts.ILine#getProduct()
 	 */
-	public Product getProduct() {
+	public IProduct getProduct() {
 		return product;
 	}
 
-	/**
-	 * @param product
-	 *            the product to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.arkaitzgarro.ecommerce.cart.model.abstracts.ILine#setProduct(com.
+	 * arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct)
 	 */
-	public void setProduct(Product product) {
+	public void setProduct(IProduct product) {
 		this.product = product;
 	}
 
-	/**
-	 * @return the quantity
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.cart.model.abstracts.ILine#getQuantity()
 	 */
 	public int getQuantity() {
 		return quantity;
 	}
 
-	/**
-	 * @param quantity
-	 *            the quantity to set
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.arkaitzgarro.ecommerce.cart.model.abstracts.ILine#setQuantity(int)
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = (quantity < 1) ? 1 : quantity;
 	}
 
-	/**
-	 * Get total with VAT included
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return
+	 * @see
+	 * com.arkaitzgarro.ecommerce.cart.model.abstracts.ILine#getTotalWithVAT()
 	 */
 	public float getTotalWithVAT() {
 		return this.quantity * this.product.getPriceWithVAT().getAmmount();
 	}
 
-	/**
-	 * Get total without VAT
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return
+	 * @see
+	 * com.arkaitzgarro.ecommerce.cart.model.abstracts.ILine#getTotalWithoutVAT
+	 * ()
 	 */
 	public float getTotalWithoutVAT() {
 		return this.quantity * this.product.getPriceWithoutVAT().getAmmount();
@@ -70,7 +83,7 @@ public abstract class AbstractLine extends AbstractEntity {
 
 	@Override
 	public boolean equals(Object o) {
-		AbstractLine cl = (AbstractLine) o;
+		ILine cl = (ILine) o;
 
 		return this.getProduct().equals(cl.getProduct());
 	}

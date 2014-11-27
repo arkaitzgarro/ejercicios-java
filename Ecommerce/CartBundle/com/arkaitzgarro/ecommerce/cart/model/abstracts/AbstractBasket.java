@@ -2,15 +2,16 @@ package com.arkaitzgarro.ecommerce.cart.model.abstracts;
 
 import java.util.ArrayList;
 
-import com.arkaitzgarro.ecommerce.catalog.model.Product;
+import com.arkaitzgarro.ecommerce.cart.model.interfaces.ILine;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
 public abstract class AbstractBasket extends AbstractEntity {
 
-	private ArrayList<AbstractLine> lines;
+	private ArrayList<ILine> lines;
 
 	public AbstractBasket() {
-		lines = new ArrayList<AbstractLine>();
+		lines = new ArrayList<ILine>();
 	}
 
 	/**
@@ -19,8 +20,8 @@ public abstract class AbstractBasket extends AbstractEntity {
 	 * @param p
 	 * @return
 	 */
-	protected AbstractLine findAbstractLine(Product p) {
-		for (AbstractLine abstractLine : lines) {
+	protected ILine findAbstractLine(IProduct p) {
+		for (ILine abstractLine : lines) {
 			if (abstractLine.getProduct().equals(p)) {
 				return abstractLine;
 			}
@@ -29,63 +30,68 @@ public abstract class AbstractBasket extends AbstractEntity {
 		return null;
 	}
 
-	/**
-	 * Get all lines
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return
+	 * @see com.arkaitzgarro.ecommerce.cart.model.abstracts.IBasket#getLines()
 	 */
-	public ArrayList<AbstractLine> getLines() {
+	public ArrayList<ILine> getLines() {
 		return this.lines;
 	}
 
-	/**
-	 * Get cart total ammount, with VAT
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return
+	 * @see
+	 * com.arkaitzgarro.ecommerce.cart.model.abstracts.IBasket#getTotalWithVAT()
 	 */
 	public float getTotalWithVAT() {
 		float total = 0;
 
-		for (AbstractLine abstractLine : lines) {
+		for (ILine abstractLine : lines) {
 			total += abstractLine.getTotalWithVAT();
 		}
 
 		return total;
 	}
 
-	/**
-	 * Get cart total ammount, without VAT
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return
+	 * @see
+	 * com.arkaitzgarro.ecommerce.cart.model.abstracts.IBasket#getTotalWithoutVAT
+	 * ()
 	 */
 	public float getTotalWithoutVAT() {
 		float total = 0;
 
-		for (AbstractLine abstractLine : lines) {
+		for (ILine abstractLine : lines) {
 			total += abstractLine.getTotalWithoutVAT();
 		}
 
 		return total;
 	}
 
-	/**
-	 * Get number of lines
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return
+	 * @see
+	 * com.arkaitzgarro.ecommerce.cart.model.abstracts.IBasket#getNumLines()
 	 */
 	public int getNumLines() {
 		return this.lines.size();
 	}
 
-	/**
-	 * Get total number of products
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return
+	 * @see
+	 * com.arkaitzgarro.ecommerce.cart.model.abstracts.IBasket#getNumProducts()
 	 */
 	public int getNumProducts() {
 		int total = 0;
 
-		for (AbstractLine abstractLine : lines) {
+		for (ILine abstractLine : lines) {
 			total += abstractLine.getQuantity();
 		}
 

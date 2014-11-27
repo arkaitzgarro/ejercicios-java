@@ -9,13 +9,17 @@ import com.arkaitzgarro.ecommerce.catalog.model.Brand;
 import com.arkaitzgarro.ecommerce.catalog.model.Currency;
 import com.arkaitzgarro.ecommerce.catalog.model.Money;
 import com.arkaitzgarro.ecommerce.catalog.model.Product;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.ICurrency;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IMoney;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
 
 public class ProductTest {
 
-	Product p;
-	Money precio;
-	Currency euro;
-	Brand apple;
+	IProduct p;
+	IMoney precio;
+	ICurrency euro;
+	IBrand apple;
 
 	@Before
 	public void setUp() {

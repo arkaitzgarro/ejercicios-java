@@ -6,7 +6,7 @@ import java.util.Date;
 import com.arkaitzgarro.ecommerce.cart.model.Cart;
 import com.arkaitzgarro.ecommerce.cart.model.Order;
 import com.arkaitzgarro.ecommerce.cart.model.OrderLine;
-import com.arkaitzgarro.ecommerce.cart.model.abstracts.AbstractLine;
+import com.arkaitzgarro.ecommerce.cart.model.interfaces.ILine;
 
 public abstract class CartToOrderTransformer {
 
@@ -17,7 +17,7 @@ public abstract class CartToOrderTransformer {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddSSS");
 		order.setReference("WEB/" + sdf.format(new Date()));
 
-		for (AbstractLine line : cart.getLines()) {
+		for (ILine line : cart.getLines()) {
 			OrderLine ol = new OrderLine(line.getProduct(), line.getQuantity(),
 					order);
 

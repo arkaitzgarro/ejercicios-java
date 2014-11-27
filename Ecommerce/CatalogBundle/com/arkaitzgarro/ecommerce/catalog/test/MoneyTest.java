@@ -8,11 +8,13 @@ import org.junit.Test;
 
 import com.arkaitzgarro.ecommerce.catalog.model.Currency;
 import com.arkaitzgarro.ecommerce.catalog.model.Money;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.ICurrency;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IMoney;
 
 public class MoneyTest {
 
-	static Money price;
-	static Currency euro;
+	static IMoney price;
+	static ICurrency euro;
 
 	@BeforeClass
 	public static void setUpClass() {
