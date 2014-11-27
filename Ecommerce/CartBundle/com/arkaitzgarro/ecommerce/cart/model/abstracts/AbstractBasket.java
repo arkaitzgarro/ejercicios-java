@@ -34,7 +34,7 @@ public abstract class AbstractBasket extends AbstractEntity {
 	 * 
 	 * @return
 	 */
-	protected ArrayList<AbstractLine> getLines() {
+	public ArrayList<AbstractLine> getLines() {
 		return this.lines;
 	}
 
@@ -47,7 +47,7 @@ public abstract class AbstractBasket extends AbstractEntity {
 		float total = 0;
 
 		for (AbstractLine abstractLine : lines) {
-			total = abstractLine.getTotalWithVAT();
+			total += abstractLine.getTotalWithVAT();
 		}
 
 		return total;
@@ -62,7 +62,7 @@ public abstract class AbstractBasket extends AbstractEntity {
 		float total = 0;
 
 		for (AbstractLine abstractLine : lines) {
-			total = abstractLine.getTotalWithoutVAT();
+			total += abstractLine.getTotalWithoutVAT();
 		}
 
 		return total;
