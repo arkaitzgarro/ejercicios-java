@@ -11,13 +11,17 @@ import com.arkaitzgarro.ecommerce.catalog.model.Brand;
 import com.arkaitzgarro.ecommerce.catalog.model.Currency;
 import com.arkaitzgarro.ecommerce.catalog.model.Money;
 import com.arkaitzgarro.ecommerce.catalog.model.Product;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.ICurrency;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IMoney;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
 
 public class CartLineTest {
 
-	static Product iphone;
-	static Money price;
-	static Currency euro;
-	static Brand apple;
+	static IProduct iphone;
+	static IMoney price;
+	static ICurrency euro;
+	static IBrand apple;
 
 	CartLine cl;
 

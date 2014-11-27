@@ -1,8 +1,9 @@
 package com.arkaitzgarro.ecommerce.cart.model;
 
 import com.arkaitzgarro.ecommerce.cart.model.abstracts.AbstractBasket;
+import com.arkaitzgarro.ecommerce.cart.model.interfaces.IBasket;
 
-public class Order extends AbstractBasket {
+public class Order extends AbstractBasket implements IBasket {
 
 	private String reference;
 

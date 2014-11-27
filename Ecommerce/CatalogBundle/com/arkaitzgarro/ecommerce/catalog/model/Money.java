@@ -1,8 +1,10 @@
 package com.arkaitzgarro.ecommerce.catalog.model;
 
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.ICurrency;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IMoney;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
-public class Money extends AbstractEntity {
+public class Money extends AbstractEntity implements IMoney {
 
 	/**
 	 * Ammount
@@ -12,50 +14,56 @@ public class Money extends AbstractEntity {
 	/**
 	 * Currency for this money
 	 */
-	private Currency currency;
+	private ICurrency currency;
 
-	public Money(float ammount, Currency currency) {
+	public Money(float ammount, ICurrency currency) {
 		this.setAmmount(ammount);
 		this.setCurrency(currency);
 	}
 
 	/**
-	 * @return Money ammount
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IMoney#getAmmount()
 	 */
 	public float getAmmount() {
 		return ammount;
 	}
 
 	/**
-	 * @param ammount
-	 *            The ammount for this money
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IMoney#setAmmount(float)
 	 */
 	public void setAmmount(float ammount) {
 		this.ammount = (ammount < 0) ? 0 : ammount;
 	}
 
 	/**
-	 * @return Money currency
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IMoney#getCurrency()
 	 */
-	public Currency getCurrency() {
+	public ICurrency getCurrency() {
 		return currency;
 	}
 
 	/**
-	 * @param currency
-	 *            The currency to set
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IMoney#setCurrency(com.arkaitzgarro
+	 *      .ecommerce.catalog.model.Currency)
 	 */
-	public void setCurrency(Currency currency) {
+	public void setCurrency(ICurrency currency) {
 		this.currency = currency;
 	}
 
 	/**
-	 * Calculate final price with given VAT
+	 * {@inheritDoc}
 	 * 
-	 * @param VAT
-	 * @return New price
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IMoney#calculateWithTax(float)
 	 */
-	public Money calculateWithTax(float VAT) {
+	public IMoney calculateWithTax(float VAT) {
 		float finalPrice = this.ammount + (this.ammount / 100 * VAT);
 
 		return new Money(finalPrice, this.currency);

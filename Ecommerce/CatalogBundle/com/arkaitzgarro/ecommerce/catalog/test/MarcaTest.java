@@ -7,10 +7,11 @@ import org.junit.Test;
 
 import com.arkaitzgarro.ecommerce.catalog.model.Brand;
 import com.arkaitzgarro.ecommerce.catalog.model.Product;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
 
 public class MarcaTest {
 
-	static Brand brand;
+	static IBrand brand;
 	static Product p1, p2;
 
 	@BeforeClass

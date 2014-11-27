@@ -2,9 +2,11 @@ package com.arkaitzgarro.ecommerce.catalog.model;
 
 import java.util.ArrayList;
 
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
-public class Brand extends AbstractEntity {
+public class Brand extends AbstractEntity implements IBrand {
 	/**
 	 * Brand name
 	 */
@@ -20,87 +22,98 @@ public class Brand extends AbstractEntity {
 	 */
 	private String description;
 
-	private ArrayList<Product> products;
+	private ArrayList<IProduct> products;
 
 	public Brand(String name) {
 		this.name = name;
-		this.products = new ArrayList<Product>();
+		this.products = new ArrayList<IProduct>();
 	}
 
 	/**
-	 * @return Brand name
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#getName()
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name
-	 *            Brand name to set
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#setName(java.lang.String)
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @return the logo
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#getLogo()
 	 */
 	public String getLogo() {
 		return this.logo;
 	}
 
 	/**
-	 * @param logo
-	 *            Brand logo to set
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#setLogo(java.lang.String)
 	 */
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
 
 	/**
-	 * @return Brand description
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#getDescription()
 	 */
 	public String getDescription() {
 		return this.description;
 	}
 
 	/**
-	 * @param description
-	 *            Brand description to set
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#setDescription(java.lang
+	 *      .String)
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * Insert a nre product
+	 * {@inheritDoc}
 	 * 
-	 * @param product
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#insertProduct(com.
+	 *      arkaitzgarro.ecommerce.catalog.model.Product)
 	 */
-	public void insertProduct(Product product) {
-		if (!this.products.contains(product)) {
+	public void insertProduct(IProduct product) {
+		if (!this.getProducts().contains(product)) {
 			// Insert only if not exists
-			products.add(product);
+			getProducts().add(product);
 
 			product.setBrand(this);
 		}
 	}
 
 	/**
-	 * Gell all products for this brand
+	 * {@inheritDoc}
 	 * 
-	 * @return Product list
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#getProducts()
 	 */
-	public ArrayList<Product> getProducts() {
+	public ArrayList<IProduct> getProducts() {
 		return this.products;
 	}
 
 	/**
-	 * Get the number of this products for this brand
+	 * {@inheritDoc}
 	 * 
-	 * @return
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IBrand#getProductCount()
 	 */
 	public int getProductCount() {
-		return this.products.size();
+		return this.getProducts().size();
 	}
 }

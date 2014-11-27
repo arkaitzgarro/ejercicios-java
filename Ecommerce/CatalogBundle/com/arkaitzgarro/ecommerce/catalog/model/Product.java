@@ -1,25 +1,10 @@
 package com.arkaitzgarro.ecommerce.catalog.model;
 
-import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
+import com.arkaitzgarro.ecommerce.catalog.model.abstracts.AbstractPurchasable;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IBrand;
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IProduct;
 
-public class Product extends AbstractEntity {
-
-	private final float VAT = 21;
-
-	/**
-	 * Product name
-	 */
-	private String name;
-
-	/**
-	 * Product brand
-	 */
-	private Brand brand;
-
-	/**
-	 * Product price
-	 */
-	private Money price;
+public class Product extends AbstractPurchasable implements IProduct {
 
 	/**
 	 * Stock
@@ -34,7 +19,7 @@ public class Product extends AbstractEntity {
 	 * @param marca
 	 *            Nombre de la marca
 	 */
-	public Product(String name, Brand brand) {
+	public Product(String name, IBrand brand) {
 		this.name = name;
 		this.setBrand(brand);
 		this.price = new Money(0, new Currency("Euro", "€"));
@@ -42,119 +27,21 @@ public class Product extends AbstractEntity {
 	}
 
 	/**
-	 * Get product name
+	 * {@inheritDoc}
 	 * 
-	 * @return
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Set product name
-	 * 
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Get brand
-	 * 
-	 * @return Get the brand
-	 */
-	public Brand getBrand() {
-		return brand;
-	}
-
-	/**
-	 * @param brand
-	 *            Set the brand for this product
-	 */
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-
-		this.brand.insertProduct(this);
-	}
-
-	/**
-	 * Get the price
-	 * 
-	 * @return
-	 */
-	public Money getPrice() {
-		return this.price;
-	}
-
-	/**
-	 * @return the stock
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#getStock()
 	 */
 	public int getStock() {
 		return stock;
 	}
 
 	/**
-	 * @param stock
-	 *            the stock to set
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.IProduct#setStock(int)
 	 */
 	public void setStock(int stock) {
 		this.stock = (stock < 0) ? 0 : stock;
-	}
-
-	/**
-	 * Get the price without VAT
-	 * 
-	 * @return
-	 */
-	public Money getPriceWithoutVAT() {
-		return this.getPrice();
-	}
-
-	/**
-	 * Get the price with VAT
-	 * 
-	 * @return
-	 */
-	public Money getPriceWithVAT() {
-		return this.price.calculateWithTax(this.VAT);
-	}
-
-	/**
-	 * Get rounded price
-	 * 
-	 * @return
-	 */
-	public int getPrecioRedondeado() {
-		return (int) Math.ceil(this.getPriceWithVAT().getAmmount());
-	}
-
-	/**
-	 * Set money (ammount) for this price
-	 * 
-	 * @param price
-	 *            Set the price for this product
-	 */
-	public void setPrice(float ammount) {
-		this.price.setAmmount(ammount);
-	}
-
-	/**
-	 * Set the price for this product
-	 * 
-	 * @param price
-	 */
-	public void setPrice(Money price) {
-		this.price = price;
-	}
-
-	/**
-	 * Get brtand full name
-	 * 
-	 * @return String
-	 */
-	public String getBrandName() {
-		return this.brand.getName();
 	}
 
 	/**
@@ -176,9 +63,5 @@ public class Product extends AbstractEntity {
 		return p.getName().equals(this.getName())
 				&& p.getBrandName().equals(this.getBrandName());
 
-	}
-
-	public Product clone() {
-		return this.clone();
 	}
 }

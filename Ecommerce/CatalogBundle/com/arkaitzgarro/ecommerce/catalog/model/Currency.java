@@ -1,8 +1,9 @@
 package com.arkaitzgarro.ecommerce.catalog.model;
 
+import com.arkaitzgarro.ecommerce.catalog.model.interfaces.ICurrency;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
-public class Currency extends AbstractEntity {
+public class Currency extends AbstractEntity implements ICurrency {
 	/**
 	 * Currency name
 	 */
@@ -25,45 +26,55 @@ public class Currency extends AbstractEntity {
 	}
 
 	/**
-	 * @return Currency name
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.ICurrency#getName()
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name
-	 *            Currency name to set
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.ICurrency#setName(java.lang.String)
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @return Currency symbol
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.ICurrency#getSymbol()
 	 */
 	public String getSymbol() {
 		return this.symbol;
 	}
 
 	/**
-	 * @param symbol
-	 *            Currency symbol to set
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.ICurrency#setSymbol(java.lang
+	 *      .String)
 	 */
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
 
 	/**
-	 * @return Exchange rate
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.ICurrency#getExchangeRate()
 	 */
 	public float getExchangeRate() {
 		return this.exchangeRate;
 	}
 
 	/**
-	 * @param cambio
-	 *            Exchange rate to set
+	 * {@inheritDoc}
+	 * 
+	 * @see com.arkaitzgarro.ecommerce.catalog.model.ICurrency#setExchangeRate(float)
 	 */
 	public void setExchangeRate(float exchangeRate) {
 		this.exchangeRate = exchangeRate;
