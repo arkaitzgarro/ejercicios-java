@@ -4,7 +4,7 @@ import com.arkaitzgarro.ecommerce.catalog.model.interfaces.ICurrency;
 import com.arkaitzgarro.ecommerce.catalog.model.interfaces.IMoney;
 import com.arkaitzgarro.ecommerce.core.model.abstracts.AbstractEntity;
 
-public class Money extends AbstractEntity implements IMoney {
+public class Money extends AbstractEntity implements IMoney, Cloneable {
 
 	/**
 	 * Ammount
@@ -69,4 +69,19 @@ public class Money extends AbstractEntity implements IMoney {
 		return new Money(finalPrice, this.currency);
 	}
 
+	/**
+	 * Create a copy of this object
+	 */
+	public Money clone() {
+		Money obj = null;
+
+		try {
+			obj = (Money) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return obj;
+	}
 }
