@@ -7,6 +7,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.arkaitzgarro.ecommerce.cart.model.Cart;
+import com.arkaitzgarro.ecommerce.cart.model.Order;
+import com.arkaitzgarro.ecommerce.cart.transformer.CartToOrderTransformer;
 import com.arkaitzgarro.ecommerce.catalog.model.Brand;
 import com.arkaitzgarro.ecommerce.catalog.model.Currency;
 import com.arkaitzgarro.ecommerce.catalog.model.Money;
@@ -14,21 +16,27 @@ import com.arkaitzgarro.ecommerce.catalog.model.Product;
 
 public class CartTest {
 
-	static Product iphone;
+	static Product iphone, nexus;
 	static Money price;
 	static Currency euro;
-	static Brand apple;
+	static Brand apple, google;
 
 	Cart cart;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		euro = new Currency("Euro", "€");
+
 		price = new Money(600, euro);
+
 		apple = new Brand("Apple");
+		google = new Brand("Google");
+
 		iphone = new Product("Apple", apple);
+		nexus = new Product("Nexus S", google);
 
 		iphone.setPrice(price);
+		nexus.setPrice(price);
 	}
 
 	@Before
@@ -101,6 +109,30 @@ public class CartTest {
 
 		assertEquals(0, cart.getTotalWithoutVAT(), 0);
 		assertEquals(0, cart.getTotalWithVAT(), 0);
+	}
+
+	@Test
+	public void testTransformCartToOrder() {
+		cart.addProduct(iphone, 1);
+		cart.addProduct(nexus, 2);
+
+		Order order = CartToOrderTransformer.transform(cart);
+
+		assertEquals(2, order.getNumLines());
+		assertEquals(3, order.getNumProducts());
+
+		assertEquals(1800, order.getTotalWithoutVAT(), 0);
+
+		cart.updateQuantity(iphone, 2);
+
+		assertEquals(2, order.getNumLines());
+		assertEquals(3, order.getNumProducts());
+
+		assertEquals(1800, order.getTotalWithoutVAT(), 0);
+
+		iphone.setPrice(500);
+
+		assertEquals(1800, order.getTotalWithoutVAT(), 0);
 	}
 
 }

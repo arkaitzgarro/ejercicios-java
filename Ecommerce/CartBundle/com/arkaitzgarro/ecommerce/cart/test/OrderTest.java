@@ -6,10 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.arkaitzgarro.ecommerce.cart.model.Order;
+import com.arkaitzgarro.ecommerce.cart.model.OrderLine;
 
 public class OrderTest {
 
 	Order order;
+	OrderLine ol;
 
 	@Before
 	public void setUp() throws Exception {

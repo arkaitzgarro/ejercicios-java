@@ -175,5 +175,10 @@ public class Product extends AbstractEntity {
 
 		return p.getName().equals(this.getName())
 				&& p.getBrandName().equals(this.getBrandName());
+
+	}
+
+	public Product clone() {
+		return this.clone();
 	}
 }

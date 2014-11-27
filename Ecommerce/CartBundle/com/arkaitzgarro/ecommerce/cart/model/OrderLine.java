@@ -7,8 +7,10 @@ public class OrderLine extends AbstractLine {
 
 	private Order order;
 
-	public OrderLine(Product p, int quantity) {
+	public OrderLine(Product p, int quantity, Order order) {
 		super(p, quantity);
+
+		this.setOrder(order);
 	}
 
 	/**

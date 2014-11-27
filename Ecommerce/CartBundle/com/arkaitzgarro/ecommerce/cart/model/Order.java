@@ -47,6 +47,19 @@ public class Order extends AbstractBasket {
 		this.reference = reference;
 	}
 
+	/**
+	 * Add a new order line
+	 * 
+	 * @param ol
+	 */
+	public void addOrderLine(OrderLine ol) {
+		if (ol != null) {
+			// TODO: comprobar que no está en el pedido
+			this.getLines().add(ol);
+		}
+
+	}
+
 	public enum Status {
 		CREATED, NOT_PAID, PAID_FAILED, PAYED;
 	}
