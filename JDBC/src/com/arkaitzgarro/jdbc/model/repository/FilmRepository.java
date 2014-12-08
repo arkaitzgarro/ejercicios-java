@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import com.arkaitzgarro.jdbc.main.DB;
 import com.arkaitzgarro.jdbc.model.Film;
@@ -200,5 +202,39 @@ public abstract class FilmRepository {
 		}
 
 		return film;
+	}
+
+	public List<Film> findAll() {
+		PreparedStatement query;
+		ResultSet rs;
+		Film film = null;
+		List<Film> list = new ArrayList<Film>();
+
+		init();
+
+		String sql = "SELECT film_id, title, description, release_year FROM film";
+
+		try {
+			// Preparar la consulta
+			query = oconn.prepareStatement(sql);
+
+			// Ejecutar la consulta
+			rs = query.executeQuery();
+
+			while (rs.next()) {
+				film = FilmFactory.create();
+
+				film.setId(rs.getInt("film_id"));
+				film.setTitle(rs.getString("title"));
+				film.setYear(rs.getDate("release_year"));
+
+				list.add(film);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 }
