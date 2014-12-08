@@ -51,6 +51,7 @@ public class Index extends HttpServlet {
 		out.println("\t" + request.getRemoteAddr());
 		out.println("Protocol:\t" + request.getProtocol());
 
+		// Mostramos todos los par‡metros de la petici—n
 		Enumeration<String> params = request.getParameterNames();
 		if (params != null) {
 			while (params.hasMoreElements()) {
@@ -59,5 +60,12 @@ public class Index extends HttpServlet {
 				out.println(param + "\t=\t" + value);
 			}
 		}
+	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		// Procesamos la petici—n como si fuese GET
+		doGet(request, response);
 	}
 }
