@@ -1,5 +1,7 @@
 package com.arkaitzgarro.jdbc.model;
 
+import java.util.Date;
+
 public class Film {
 
 	/**
@@ -20,7 +22,7 @@ public class Film {
 	/**
 	 * Year
 	 */
-	private byte year;
+	private Date year;
 
 	/**
 	 * Film language
@@ -75,7 +77,7 @@ public class Film {
 	/**
 	 * @return the year
 	 */
-	public byte getYear() {
+	public Date getYear() {
 		return year;
 	}
 
@@ -83,7 +85,7 @@ public class Film {
 	 * @param year
 	 *            the year to set
 	 */
-	public void setYear(byte year) {
+	public void setYear(Date year) {
 		this.year = year;
 	}
 
