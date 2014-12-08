@@ -19,20 +19,18 @@ import com.mysql.jdbc.Statement;
 public abstract class FilmRepository {
 	private static Connection oconn;
 
-	private FilmRepository() {
+	private FilmRepository() throws ClassNotFoundException, SQLException {
 		init();
 	}
 
 	/**
 	 * Get database connection
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
 	 */
-	private static void init() {
-		try {
-			oconn = DB.getConnection();
-		} catch (SQLException e) {
-			System.out.println("Unable to connect to DB.");
-			e.printStackTrace();
-		}
+	private static void init() throws ClassNotFoundException, SQLException {
+		oconn = DB.getConnection();
 	}
 
 	/**
@@ -40,8 +38,11 @@ public abstract class FilmRepository {
 	 * 
 	 * @param film
 	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
 	 */
-	public static boolean addFilm(Film film) {
+	public static boolean addFilm(Film film) throws ClassNotFoundException,
+			SQLException {
 		PreparedStatement ins = null;
 		Calendar cal = Calendar.getInstance();
 
@@ -87,8 +88,11 @@ public abstract class FilmRepository {
 	 * Remove a film with given ID
 	 * 
 	 * @param id
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
 	 */
-	public static boolean removeFilm(int id) {
+	public static boolean removeFilm(int id) throws ClassNotFoundException,
+			SQLException {
 		Film film = findOneById(id);
 
 		return removeFilm(film);
@@ -99,8 +103,11 @@ public abstract class FilmRepository {
 	 * 
 	 * @param film
 	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
 	 */
-	public static boolean removeFilm(Film film) {
+	public static boolean removeFilm(Film film) throws ClassNotFoundException,
+			SQLException {
 		PreparedStatement ins = null;
 
 		init();
@@ -131,8 +138,11 @@ public abstract class FilmRepository {
 	 * 
 	 * @param film
 	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
 	 */
-	public static boolean updateFilm(Film film) {
+	public static boolean updateFilm(Film film) throws ClassNotFoundException,
+			SQLException {
 		PreparedStatement ins = null;
 		Calendar cal = Calendar.getInstance();
 
@@ -171,8 +181,11 @@ public abstract class FilmRepository {
 	 * 
 	 * @param id
 	 * @return Film
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
 	 */
-	public static Film findOneById(int id) {
+	public static Film findOneById(int id) throws ClassNotFoundException,
+			SQLException {
 		PreparedStatement query;
 		ResultSet rs;
 		Film film = null;
@@ -204,7 +217,8 @@ public abstract class FilmRepository {
 		return film;
 	}
 
-	public List<Film> findAll() {
+	public static List<Film> findAll() throws ClassNotFoundException,
+			SQLException {
 		PreparedStatement query;
 		ResultSet rs;
 		Film film = null;
@@ -226,6 +240,7 @@ public abstract class FilmRepository {
 
 				film.setId(rs.getInt("film_id"));
 				film.setTitle(rs.getString("title"));
+				film.setDescription(rs.getString("description"));
 				film.setYear(rs.getDate("release_year"));
 
 				list.add(film);

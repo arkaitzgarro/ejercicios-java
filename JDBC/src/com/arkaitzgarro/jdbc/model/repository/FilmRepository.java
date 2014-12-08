@@ -204,7 +204,7 @@ public abstract class FilmRepository {
 		return film;
 	}
 
-	public List<Film> findAll() {
+	public static List<Film> findAll() {
 		PreparedStatement query;
 		ResultSet rs;
 		Film film = null;

@@ -12,11 +12,13 @@ public final class DB {
 	private String user = "sakila";
 	private String pass = "sakila";
 
-	private DB() throws SQLException {
+	private DB() throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
 		oconn = DriverManager.getConnection(url, user, pass);
 	}
 
-	public static final Connection getConnection() throws SQLException {
+	public static final Connection getConnection() throws SQLException,
+			ClassNotFoundException {
 		if (db == null) {
 			db = new DB();
 		}

@@ -104,4 +104,12 @@ public class Film {
 		this.language = language;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("id: " + this.id);
+
+		return sb.toString();
+	}
 }
