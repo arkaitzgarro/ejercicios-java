@@ -3,7 +3,9 @@ package com.arkaitzgarro.rest.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 import org.junit.BeforeClass;
@@ -28,26 +30,37 @@ public class FilmTest {
 
 	@Test
 	public void testRepository() {
-		Film film = FilmRepository.findOneById(1);
+		Film film;
 
-		assertTrue(film instanceof Film);
-		assertEquals(1, film.getId());
+		try {
+			film = FilmRepository.findOneById(1);
 
-		Film newFilm = FilmFactory.create();
-		newFilm.setTitle("Interstellar");
-		newFilm.setDescription("A group of explorers must travel beyond our solar system in search of a planet that can sustain life. The crew of the Endurance are required to think bigger and go further than any human in history as they embark on an interstellar voyage, into the unknown.");
-		newFilm.setYear(new Date());
+			assertTrue(film instanceof Film);
+			assertEquals(1, film.getId());
 
-		assertTrue(FilmRepository.addFilm(newFilm));
-		assertNotEquals(0, newFilm.getId());
+			Film newFilm = FilmFactory.create();
+			newFilm.setTitle("Interstellar");
+			newFilm.setDescription("A group of explorers must travel beyond our solar system in search of a planet that can sustain life. The crew of the Endurance are required to think bigger and go further than any human in history as they embark on an interstellar voyage, into the unknown.");
+			newFilm.setYear(new Date());
 
-		newFilm.setTitle("Interstellar 2014");
-		assertTrue(FilmRepository.updateFilm(newFilm));
+			assertTrue(FilmRepository.addFilm(newFilm));
+			assertNotEquals(0, newFilm.getId());
 
-		Film otherFilm = FilmRepository.findOneById(newFilm.getId());
-		assertEquals(newFilm.getId(), otherFilm.getId());
-		assertEquals("Interstellar 2014", otherFilm.getTitle());
+			newFilm.setTitle("Interstellar 2014");
+			assertTrue(FilmRepository.updateFilm(newFilm));
 
-		assertTrue(FilmRepository.removeFilm(newFilm));
+			Film otherFilm = FilmRepository.findOneById(newFilm.getId());
+			assertEquals(newFilm.getId(), otherFilm.getId());
+			assertEquals("Interstellar 2014", otherFilm.getTitle());
+
+			assertTrue(FilmRepository.removeFilm(newFilm));
+		} catch (ClassNotFoundException e) {
+			fail();
+			e.printStackTrace();
+		} catch (SQLException e) {
+			fail();
+			e.printStackTrace();
+		}
+
 	}
 }

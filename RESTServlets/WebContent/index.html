@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>	
+	<div class="container">
+		<h1>RESTfull film project</h1>
+		
+		<button id="get-data" class="btn btn-primary btn-sm" data-loading-text="Loading...">Obtener datos</button>
+		
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Descripción</th>
+					<th>Año</th>
+					<th class="actions">Acciones</th>
+				</tr>
+			</thead>
+			<tbody class="rows">
+				
+			</tbody>
+		</table>
+	</div>
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/x-template" id="row-template">
+		<tr>
+			<td>__id__</td>
+			<td>__title__</td>
+			<td>__description__</td>
+			<td>__year__</td>
+			<td>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-warning btn-xs">Editar</button>
+					<button type="button" class="btn btn-danger btn-xs">Borrar</button>
+				</div>
+			</td>
+		</tr>
+	</script>
+</body>
+</html>
