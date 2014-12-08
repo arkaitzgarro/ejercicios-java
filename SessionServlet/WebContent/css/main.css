@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+table {
+	margin-top: 1em;
+}
+
+table .actions {
+	min-width: 110px;
+}
