@@ -2,9 +2,9 @@ package com.arkaitzgarro.jdbc.model.factory;
 
 import com.arkaitzgarro.jdbc.model.Film;
 
-public abstract class FilmFactory {
+public class FilmFactory {
 
-	public static Film create() {
+	public Film create() {
 		Film film = new Film();
 
 		return film;

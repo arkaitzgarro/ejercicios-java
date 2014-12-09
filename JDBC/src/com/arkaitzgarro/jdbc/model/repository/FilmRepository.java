@@ -1,9 +1,5 @@
-/**
- * 
- */
 package com.arkaitzgarro.jdbc.model.repository;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,119 +7,114 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.arkaitzgarro.jdbc.main.DB;
+import com.arkaitzgarro.jdbc.db.DataBaseHelper;
 import com.arkaitzgarro.jdbc.model.Film;
-import com.arkaitzgarro.jdbc.model.factory.FilmFactory;
-import com.mysql.jdbc.Statement;
 
-public abstract class FilmRepository {
-	private static Connection oconn;
+public class FilmRepository {
+	private DataBaseHelper dbHelper;
 
-	private FilmRepository() {
-		init();
+	public FilmRepository() throws SQLException {
+		dbHelper = new DataBaseHelper();
 	}
 
 	/**
-	 * Get database connection
-	 */
-	private static void init() {
-		try {
-			oconn = DB.getConnection();
-		} catch (SQLException e) {
-			System.out.println("Unable to connect to DB.");
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Insert a new film into DB
+	 * Buscar todas las peliculas de la base de datos
 	 * 
-	 * @param film
 	 * @return
 	 */
-	public static boolean addFilm(Film film) {
-		PreparedStatement ins = null;
-		Calendar cal = Calendar.getInstance();
+	public List<Film> findAll() {
+		List<Film> list = new ArrayList<Film>();
+		String sql = "SELECT film_id, title, description, release_year FROM film;";
 
-		init();
-
-		String sql = "INSERT INTO film(title, description, release_year, language_id)"
-				+ " VALUES(?,?,?,?)";
-
+		ResultSet rows = dbHelper.query(sql);
 		try {
-			// Preparar la consulta
-			ins = oconn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			if (rows != null) {
+				while (rows.next()) {
+					Film film = new Film();
+					film.setId(rows.getLong("film_id"));
+					film.setTitle(rows.getString("title"));
+					film.setDescription(rows.getString("description"));
+					film.setYear(rows.getDate("release_year"));
 
-			// Completar los datos
-			ins.setString(1, film.getTitle());
-			ins.setString(2, film.getDescription());
-
-			cal.setTime(film.getYear());
-			ins.setString(3, String.valueOf(cal.get(Calendar.YEAR)));
-			ins.setInt(4, 1);
-
-			int rows = ins.executeUpdate();
-
-			if (rows == 1) {
-				ResultSet generatedKeys = ins.getGeneratedKeys();
-				if (generatedKeys.next()) {
-					film.setId((int) generatedKeys.getLong(1));
-
-					return true;
+					list.add(film);
 				}
 			}
-
-			return false;
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(ins.toString());
-
-			return false;
 		}
+
+		return list;
 	}
 
 	/**
-	 * Remove a film with given ID
+	 * Busca una pelicula por ID
 	 * 
 	 * @param id
+	 * @return
 	 */
-	public static boolean removeFilm(int id) {
-		Film film = findOneById(id);
+	public Film findOneById(long id) {
+		Film film = null;
 
-		return removeFilm(film);
+		String sql = "SELECT * FROM film  WHERE film_id = ?;";
+		PreparedStatement query = dbHelper.queryPrepared(sql);
+
+		try {
+			if (query != null) {
+				query.setLong(1, id);
+
+				ResultSet row = query.executeQuery();
+
+				if (row != null && row.next()) {
+					film = new Film();
+					film.setId(row.getLong("film_id"));
+					film.setTitle(row.getString("title"));
+					film.setDescription(row.getString("description"));
+					film.setYear(row.getDate("release_year"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return film;
 	}
 
 	/**
-	 * Remove a film from DB
+	 * Insertar una pelicula en la base de datos
 	 * 
 	 * @param film
 	 * @return
 	 */
-	public static boolean removeFilm(Film film) {
-		PreparedStatement ins = null;
+	public boolean insert(Film film) {
 
-		init();
+		String insert = "INSERT INTO film(title, description, release_year, language_id)"
+				+ " VALUES(?, ?, ?, 1);";
 
-		String sql = "DELETE FROM film WHERE film_id = ?";
+		Calendar cal = Calendar.getInstance();
+		PreparedStatement query = dbHelper.queryPrepared(insert);
 
 		try {
-			// Preparar la consulta
-			ins = oconn.prepareStatement(sql);
+			if (query != null) {
+				query.setString(1, film.getTitle());
+				query.setString(2, film.getDescription());
+				query.setString(3, String.valueOf(cal.get(Calendar.YEAR)));
 
-			// Completar los datos
-			ins.setInt(1, film.getId());
+				int rows = query.executeUpdate();
 
-			int rows = ins.executeUpdate();
+				if (rows == 1) {
+					ResultSet generatedKeys = query.getGeneratedKeys();
+					if (generatedKeys.next()) {
+						film.setId((int) generatedKeys.getLong(1));
 
-			return rows == 1;
-
+						return true;
+					}
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(ins.toString());
-
-			return false;
 		}
+
+		return false;
 	}
 
 	/**
@@ -132,109 +123,57 @@ public abstract class FilmRepository {
 	 * @param film
 	 * @return
 	 */
-	public static boolean updateFilm(Film film) {
-		PreparedStatement ins = null;
+	public boolean update(Film film) {
 		Calendar cal = Calendar.getInstance();
-
-		init();
 
 		String sql = "UPDATE film"
 				+ " SET title=?, description=?, release_year=?"
 				+ " WHERE film_id=?";
 
+		// Preparar la consulta
+		PreparedStatement query = dbHelper.queryPrepared(sql);
+
 		try {
-			// Preparar la consulta
-			ins = oconn.prepareStatement(sql);
+			if (query != null) {
+				query.setString(1, film.getTitle());
+				query.setString(2, film.getDescription());
 
-			// Completar los datos
-			ins.setString(1, film.getTitle());
-			ins.setString(2, film.getDescription());
+				query.setString(3, String.valueOf(cal.get(Calendar.YEAR)));
+				query.setLong(4, film.getId());
 
-			cal.setTime(film.getYear());
-			ins.setString(3, String.valueOf(cal.get(Calendar.YEAR)));
-			ins.setInt(4, film.getId());
+				int rows = query.executeUpdate();
 
-			int rows = ins.executeUpdate();
+				return rows == 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	/**
+	 * Remove a film from DB
+	 * 
+	 * @param film
+	 * @return
+	 */
+	public boolean delete(Film film) {
+		String sql = "DELETE FROM film WHERE film_id = ?";
+
+		try {
+			PreparedStatement query = dbHelper.queryPrepared(sql);
+
+			query.setLong(1, film.getId());
+
+			int rows = query.executeUpdate();
 
 			return rows == 1;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println(ins.toString());
-
-			return false;
-		}
-	}
-
-	/**
-	 * Find one film by given ID
-	 * 
-	 * @param id
-	 * @return Film
-	 */
-	public static Film findOneById(int id) {
-		PreparedStatement query;
-		ResultSet rs;
-		Film film = null;
-
-		init();
-
-		String sql = "SELECT film_id, title, description, release_year FROM film WHERE film_id = ?";
-
-		try {
-			// Preparar la consulta
-			query = oconn.prepareStatement(sql);
-			query.setInt(1, id);
-
-			// Ejecutar la consulta
-			rs = query.executeQuery();
-
-			if (rs.next()) {
-				film = FilmFactory.create();
-
-				film.setId(rs.getInt("film_id"));
-				film.setTitle(rs.getString("title"));
-				film.setYear(rs.getDate("release_year"));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 
-		return film;
-	}
-
-	public static List<Film> findAll() {
-		PreparedStatement query;
-		ResultSet rs;
-		Film film = null;
-		List<Film> list = new ArrayList<Film>();
-
-		init();
-
-		String sql = "SELECT film_id, title, description, release_year FROM film";
-
-		try {
-			// Preparar la consulta
-			query = oconn.prepareStatement(sql);
-
-			// Ejecutar la consulta
-			rs = query.executeQuery();
-
-			while (rs.next()) {
-				film = FilmFactory.create();
-
-				film.setId(rs.getInt("film_id"));
-				film.setTitle(rs.getString("title"));
-				film.setYear(rs.getDate("release_year"));
-
-				list.add(film);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return list;
+		return false;
 	}
 }
