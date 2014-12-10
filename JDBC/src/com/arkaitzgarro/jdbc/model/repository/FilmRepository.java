@@ -38,6 +38,8 @@ public class FilmRepository {
 
 					list.add(film);
 				}
+
+				rows.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,6 +73,8 @@ public class FilmRepository {
 					film.setDescription(row.getString("description"));
 					film.setYear(row.getDate("release_year"));
 				}
+
+				row.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -106,12 +110,23 @@ public class FilmRepository {
 					if (generatedKeys.next()) {
 						film.setId(generatedKeys.getLong(1));
 
+						generatedKeys.close();
+						query.close();
+
 						return true;
 					}
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (query != null) {
+					query.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return false;
@@ -143,6 +158,8 @@ public class FilmRepository {
 
 				int rows = query.executeUpdate();
 
+				query.close();
+
 				return rows == 1;
 			}
 		} catch (SQLException e) {
@@ -168,6 +185,8 @@ public class FilmRepository {
 				query.setLong(1, film.getId());
 
 				int rows = query.executeUpdate();
+
+				query.close();
 
 				return rows == 1;
 			}
