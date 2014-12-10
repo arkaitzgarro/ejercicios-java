@@ -45,6 +45,7 @@ public class FilmTest {
 		newFilm.setDescription("A group of explorers must travel beyond our solar system in search of a planet that can sustain life. The crew of the Endurance are required to think bigger and go further than any human in history as they embark on an interstellar voyage, into the unknown.");
 		newFilm.setYear(new Date());
 
+		assertEquals(0, newFilm.getId());
 		assertTrue(filmRepository.insert(newFilm));
 		assertNotEquals(0, newFilm.getId());
 

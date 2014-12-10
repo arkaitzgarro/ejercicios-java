@@ -104,7 +104,7 @@ public class FilmRepository {
 				if (rows == 1) {
 					ResultSet generatedKeys = query.getGeneratedKeys();
 					if (generatedKeys.next()) {
-						film.setId((int) generatedKeys.getLong(1));
+						film.setId(generatedKeys.getLong(1));
 
 						return true;
 					}
