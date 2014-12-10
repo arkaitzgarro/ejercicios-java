@@ -24,12 +24,12 @@ public class FilmTest {
 		filmFactory = new FilmFactory();
 	}
 
-	// @Test
-	// public void testFactory() {
-	// Film film = FilmFactory.create();
-	//
-	// assertTrue(film instanceof Film);
-	// }
+	@Test
+	public void testFactory() {
+		Film film = filmFactory.create();
+
+		assertTrue(film instanceof Film);
+	}
 
 	@Test
 	public void testRepository() {

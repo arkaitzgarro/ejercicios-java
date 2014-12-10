@@ -53,7 +53,7 @@ public class DataBaseHelper {
 	}
 
 	/**
-	 * Ejecuta la sentencia en la BD
+	 * Ejecuta la sentencia en la BD (INSERT, UPDATE, DELETE)
 	 * 
 	 * @param sql
 	 */
@@ -71,7 +71,7 @@ public class DataBaseHelper {
 	}
 
 	/**
-	 * Crear y almacenar una sentencia en la BD
+	 * Crear y almacenar una sentencia en la BD (INSERT, UPDATE, DELETE)
 	 * 
 	 * @param sql
 	 * @return
@@ -88,28 +88,4 @@ public class DataBaseHelper {
 
 		return query;
 	}
-
-	/**
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public ResultSet findActorByName(String name) {
-		String sql = "SELECT * FROM actor"
-				+ " WHERE first_name LIKE ? OR last_name LIKE ?;";
-		ResultSet rows = null;
-
-		try {
-			PreparedStatement query = oconn.prepareStatement(sql);
-			query.setString(1, "%" + name + "%");
-			query.setString(2, "%" + name + "%");
-
-			rows = query.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return rows;
-	}
-
 }

@@ -33,8 +33,6 @@ public class DBHelperTest {
 		assertNotNull(dbHelper);
 
 		assertNotNull(dbHelper.query("SELECT * FROM actor;"));
-
-		// assertNotNull(dbHelper.findActorByName("Penelope"));
 	}
 
 	@Test

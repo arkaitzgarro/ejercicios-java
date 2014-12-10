@@ -164,12 +164,13 @@ public class FilmRepository {
 		try {
 			PreparedStatement query = dbHelper.queryPrepared(sql);
 
-			query.setLong(1, film.getId());
+			if (query != null) {
+				query.setLong(1, film.getId());
 
-			int rows = query.executeUpdate();
+				int rows = query.executeUpdate();
 
-			return rows == 1;
-
+				return rows == 1;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
