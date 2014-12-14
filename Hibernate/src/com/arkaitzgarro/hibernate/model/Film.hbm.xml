@@ -9,5 +9,6 @@
 		</id>
 		<property name="title" type="string" column="title" />
 		<property name="description" type="text" column="description" />
+		<many-to-one name="language" column="language_id" cascade="persist" not-null="true" fetch="join" />
 	</class>
 </hibernate-mapping>

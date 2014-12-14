@@ -1,5 +1,6 @@
 package com.arkaitzgarro.hibernate.model;
 
+
 public class Film {
 	private long id;
 
@@ -39,5 +40,10 @@ public class Film {
 
 	public void setLanguage(Language language) {
 		this.language = language;
+	}
+
+	@Override
+	public boolean equals(Object film) {
+		return this.getId() == ((Film) film).getId();
 	}
 }

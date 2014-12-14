@@ -11,16 +11,20 @@ import org.junit.Test;
 
 import com.arkaitzgarro.hibernate.factory.FilmFactory;
 import com.arkaitzgarro.hibernate.model.Film;
+import com.arkaitzgarro.hibernate.model.Language;
 import com.arkaitzgarro.hibernate.repository.FilmRepository;
+import com.arkaitzgarro.hibernate.repository.LanguageRepository;
 
 public class FilmTest {
 
 	static FilmRepository filmRepository;
+	static LanguageRepository langRepository;
 	static FilmFactory filmFactory;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		filmRepository = new FilmRepository();
+		langRepository = new LanguageRepository();
 		filmFactory = new FilmFactory();
 	}
 
@@ -39,6 +43,7 @@ public class FilmTest {
 		Film newFilm = filmFactory.create();
 		newFilm.setTitle("Interstellar");
 		newFilm.setDescription("A group of explorers must travel beyond our solar system in search of a planet that can sustain life. The crew of the Endurance are required to think bigger and go further than any human in history as they embark on an interstellar voyage, into the unknown.");
+		newFilm.setLanguage(langRepository.findOneById(1));
 		// newFilm.setYear(new Date());
 		//
 		assertEquals(0, newFilm.getId());
@@ -55,4 +60,13 @@ public class FilmTest {
 		assertTrue(filmRepository.delete(newFilm));
 	}
 
+	@Test
+	public void testLanguageRelation() {
+		Film film = filmRepository.findOneById(1);
+		assertTrue(film instanceof Film);
+		assertEquals(1, film.getId());
+
+		assertTrue(film.getLanguage() instanceof Language);
+		assertEquals(film.getLanguage().getId(), 1);
+	}
 }

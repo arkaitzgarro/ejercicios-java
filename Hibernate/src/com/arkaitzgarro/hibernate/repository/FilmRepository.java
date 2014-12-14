@@ -2,10 +2,12 @@ package com.arkaitzgarro.hibernate.repository;
 
 import java.util.List;
 
+import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import com.arkaitzgarro.hibernate.model.Film;
 import com.arkaitzgarro.hibernate.util.HibernateUtil;
@@ -59,6 +61,10 @@ public class FilmRepository {
 
 			film = (Film) session.get(Film.class, id);
 
+			film = (Film) session.createCriteria(Film.class)
+					.setFetchMode("language", FetchMode.JOIN)
+					.add(Restrictions.idEq(id)).uniqueResult();
+
 			session.close();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -75,6 +81,7 @@ public class FilmRepository {
 	 * @param str
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Film> findByStr(String str) {
 		List<Film> list = null;
 
