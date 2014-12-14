@@ -20,14 +20,17 @@ public class DataBaseHelper {
 	 * @throws SQLException
 	 */
 	public DataBaseHelper() throws SQLException {
-		// Class.forName("com.mysql.jdbc.Driver");
 		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			oconn = DriverManager.getConnection(url, user, pass);
 		} catch (SQLException e) {
 			// A–adir el error a un log
 			System.out.println("No se ha podido conectar con la BD");
 
 			throw e;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

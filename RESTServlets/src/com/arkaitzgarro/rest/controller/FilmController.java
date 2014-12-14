@@ -8,27 +8,28 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.arkaitzgarro.rest.model.Film;
-import com.arkaitzgarro.rest.model.factory.FilmFactory;
-import com.arkaitzgarro.rest.model.repository.FilmRepository;
+import com.arkaitzgarro.jdbc.model.Film;
+import com.arkaitzgarro.jdbc.model.factory.FilmFactory;
+import com.arkaitzgarro.jdbc.model.repository.FilmRepository;
 import com.google.gson.Gson;
 
 /**
  * Servlet implementation class FilmController
  */
-@WebServlet("/film/*")
 public class FilmController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static Gson gson;
+	private static FilmFactory filmFactory;
+	private static FilmRepository filmRepository;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -44,6 +45,14 @@ public class FilmController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		// Iniciar variables para este servlet
 		gson = new Gson();
+		filmFactory = new FilmFactory();
+
+		try {
+			filmRepository = new FilmRepository();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -53,18 +62,33 @@ public class FilmController extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		if (request.getMethod().equals("HEAD"))
+		if (request.getMethod().equals("HEAD")) {
 			return;
+		}
 
-		response.setContentType("text/json");
 		PrintWriter out = response.getWriter();
+		List<Film> list = null;
 
-		String param = UriMatcher.getType(request.getRequestURI());
+		// String param = UriMatcher.getType(request.getRequestURI());
+		// if (param == UriMatcher.ALL_ROWS) {}
+		String format = request.getParameter("format");
 
-		if (param == UriMatcher.ALL_ROWS) {
-			printAllRows(out);
+		format = (format != null) ? format : "html";
+
+		// Devolver un listado con todas las pel’culas
+		if (filmRepository != null) {
+			list = filmRepository.findAll();
+		}
+
+		if (format.equals("json")) {
+			response.setContentType("text/json");
+			out.print(gson.toJson(list));
 		} else {
-			printOneRow(UriMatcher.getId(), out);
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(
+					"/inc/film-list.jsp");
+
+			request.setAttribute("list", list);
+			rd.include(request, response);
 		}
 
 	}
@@ -82,7 +106,7 @@ public class FilmController extends HttpServlet {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 
 		// Obtener los datos por POST y a–adir una nueva pel’cula
-		Film film = FilmFactory.create();
+		Film film = filmFactory.create();
 		film.setTitle(request.getParameter("title"));
 		film.setDescription(request.getParameter("description"));
 
@@ -93,17 +117,12 @@ public class FilmController extends HttpServlet {
 			film.setYear(new Date());
 		}
 
-		try {
-			FilmRepository.addFilm(film);
-		} catch (ClassNotFoundException e) {
-			out.print("Error de conexi—n con la BD");
-			System.exit(0);
-		} catch (SQLException e) {
-			out.print("Error de conexi—n con la BD");
-			System.exit(0);
+		if (filmRepository != null) {
+			filmRepository.insert(film);
+			out.print(gson.toJson(film));
+		} else {
+			out.print(gson.toJson(null));
 		}
-
-		out.print(gson.toJson(film));
 	}
 
 	/**
@@ -113,15 +132,10 @@ public class FilmController extends HttpServlet {
 	 */
 	private void printAllRows(PrintWriter out) {
 		List<Film> list = null;
-		try {
-			// Devolver un listado con todas las pel’culas
-			list = FilmRepository.findAll();
-		} catch (ClassNotFoundException e) {
-			out.print("Error de conexi—n con la BD");
-			System.exit(0);
-		} catch (SQLException e) {
-			out.print("Error de conexi—n con la BD");
-			System.exit(0);
+
+		// Devolver un listado con todas las pel’culas
+		if (filmRepository != null) {
+			list = filmRepository.findAll();
 		}
 
 		out.print(gson.toJson(list));
@@ -135,15 +149,10 @@ public class FilmController extends HttpServlet {
 	 */
 	private void printOneRow(int id, PrintWriter out) {
 		Film film = null;
-		try {
-			// Devolver un listado con todas las pel’culas
-			film = FilmRepository.findOneById(id);
-		} catch (ClassNotFoundException e) {
-			out.print("Error de conexi—n con la BD");
-			System.exit(0);
-		} catch (SQLException e) {
-			out.print("Error de conexi—n con la BD");
-			System.exit(0);
+
+		// Devolver un listado con todas las pel’culas
+		if (filmRepository != null) {
+			film = filmRepository.findOneById(id);
 		}
 
 		out.print(gson.toJson(film));
