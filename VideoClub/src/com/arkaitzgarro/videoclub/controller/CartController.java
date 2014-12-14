@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.arkaitzgarro.jdbc.model.Film;
+import com.arkaitzgarro.jdbc.model.interfaces.IFilm;
 import com.arkaitzgarro.jdbc.model.repository.FilmRepository;
 
 /**
@@ -25,7 +24,7 @@ public class CartController extends HttpServlet {
 
 	private FilmRepository filmRepository;
 
-	private final String LIST_NAME = "listFilm";
+	public static final String LIST_NAME = "listFilm";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -57,7 +56,6 @@ public class CartController extends HttpServlet {
 
 		String filmId = request.getParameter("film_id");
 
-		RequestDispatcher rd = null;
 		HttpSession session = request.getSession(true);
 
 		if (filmId != null) {
@@ -65,21 +63,25 @@ public class CartController extends HttpServlet {
 				// Convertir el parametro a nœmero
 				long id = Long.parseLong(filmId);
 
-				Film film = filmRepository.findOneById(id);
+				IFilm film = filmRepository.findOneById(id);
 
 				if (film != null) {
-					List<Film> filmList = (List<Film>) session
+					List<IFilm> filmList = (List<IFilm>) session
 							.getAttribute(LIST_NAME);
 
 					if (filmList == null) {
-						filmList = new ArrayList<Film>();
+						filmList = new ArrayList<IFilm>();
 					}
 
-					// A–adimos la pelicula a la lista
-					filmList.add(film);
+					if (!filmList.contains(film)) {
+						// A–adimos la pelicula a la lista
+						filmList.add(film);
+						// Guardamis la lista en la sesi—n
+						session.setAttribute(LIST_NAME, filmList);
+					}
 
-					session.setAttribute(LIST_NAME, filmList);
-
+					response.sendRedirect(request.getContextPath()
+							+ "/carro/ver");
 				} else {
 					// No existe la pel’cula
 					response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -89,7 +91,8 @@ public class CartController extends HttpServlet {
 			}
 		} else {
 			// No se ha proporcionado un film_id
-			response.sendRedirect("/peliculas/listado");
+			response.sendRedirect(request.getContextPath()
+					+ "/peliculas/listado");
 		}
 	}
 }

@@ -3,7 +3,7 @@
 
 	<div class="container">
 		<footer>
-			<p>&copy; 2014 Arkaitz Garro</p>
+			<p class="copy">&copy; 2014 Arkaitz Garro</p>
 		</footer>
 	</div>
 </body>

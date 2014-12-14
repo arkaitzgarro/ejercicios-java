@@ -21,3 +21,7 @@ footer .copy {
 	font-size: 0.8em;
 	text-align: center;
 }
+
+.navbar-brand img {
+	background-color: #fff;
+}

@@ -39,4 +39,24 @@
     <servlet-name>CartController</servlet-name>
     <url-pattern>/carro/agregar</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CartViewController</display-name>
+    <servlet-name>CartViewController</servlet-name>
+    <servlet-class>com.arkaitzgarro.videoclub.controller.CartViewController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartViewController</servlet-name>
+    <url-pattern>/carro/ver</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CartDeleteController</display-name>
+    <servlet-name>CartDeleteController</servlet-name>
+    <servlet-class>com.arkaitzgarro.videoclub.controller.CartDeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartDeleteController</servlet-name>
+    <url-pattern>/carro/quitar</url-pattern>
+  </servlet-mapping>
 </web-app>

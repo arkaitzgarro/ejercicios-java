@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.arkaitzgarro.jdbc.model.Film;
+import com.arkaitzgarro.jdbc.model.interfaces.IFilm;
 import com.arkaitzgarro.jdbc.model.repository.FilmRepository;
 import com.google.gson.Gson;
 
@@ -44,6 +44,7 @@ public class FilmController extends HttpServlet {
 		try {
 			filmRepository = new FilmRepository();
 		} catch (SQLException e) {
+			// TODO: mostrar un error en la UI
 			e.printStackTrace();
 		}
 	}
@@ -56,7 +57,7 @@ public class FilmController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		String format = request.getParameter("format");
-		List<Film> listFilm = filmRepository.findAll();
+		List<IFilm> listFilm = filmRepository.findAll();
 
 		if (format != null && format.equals("json")) {
 			response.setContentType("text/json");

@@ -5,7 +5,7 @@
 	<div class="container-fluid">
 		<div class="nabvar-header">
 			<a href="${pageContext.request.contextPath}/" class="navbar-brand">
-				<img src="" alt="Brand">
+				<img src="${pageContext.request.contextPath}/img/dvd-logo.png" alt="Brand">
 			</a>
 		</div>
 		<form class="navbar-form navbar-right">

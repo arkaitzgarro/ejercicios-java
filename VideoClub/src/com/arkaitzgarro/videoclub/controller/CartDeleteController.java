@@ -2,32 +2,34 @@ package com.arkaitzgarro.videoclub.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.arkaitzgarro.jdbc.model.interfaces.IFilm;
 import com.arkaitzgarro.jdbc.model.repository.FilmRepository;
 
 /**
- * Servlet implementation class FilmViewController
+ * Servlet implementation class CartDeleteController
  */
-public class FilmViewController extends HttpServlet {
+public class CartDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private FilmRepository filmRepository;
 
+	public static final String LIST_NAME = "listFilm";
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public FilmViewController() {
+	public CartDeleteController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -52,26 +54,27 @@ public class FilmViewController extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String filmId = request.getParameter("film_id");
 
-		RequestDispatcher rd = null;
+		HttpSession session = request.getSession(true);
 
 		if (filmId != null) {
 			try {
 				// Convertir el parametro a nœmero
 				long id = Long.parseLong(filmId);
 
-				IFilm film = filmRepository.findOneById(id);
+				List<IFilm> filmList = (List<IFilm>) session
+						.getAttribute(LIST_NAME);
 
-				if (film != null) {
-					// Mostramos si existe
-					request.setAttribute("film", film);
+				if (filmList != null) {
+					for (int i = 0; i < filmList.size(); i++) {
+						IFilm film = filmList.get(0);
 
-					rd = getServletContext().getRequestDispatcher(
-							"/inc/film/view.jsp");
-					rd.include(request, response);
-				} else {
-					// No existe la pel’cula
-					response.sendError(HttpServletResponse.SC_NOT_FOUND);
+						if (film.getId() == id) {
+							filmList.remove(i);
+						}
+					}
 				}
+
+				response.sendRedirect(request.getContextPath() + "/carro/ver");
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			}
