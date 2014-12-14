@@ -10,14 +10,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 import com.arkaitzgarro.hibernate.model.Film;
-import com.arkaitzgarro.hibernate.util.HibernateUtil;
+import com.arkaitzgarro.hibernate.util.HibernateHelper;
 
 public class FilmRepository {
 
 	private SessionFactory sessionFactory;
 
 	public FilmRepository() {
-		sessionFactory = HibernateUtil.getSessionFactory();
+		sessionFactory = HibernateHelper.getSessionFactory();
 	}
 
 	/**

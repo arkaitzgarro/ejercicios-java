@@ -3,7 +3,7 @@ package com.arkaitzgarro.hibernate.util;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateUtil {
+public class HibernateHelper {
 	private static SessionFactory sessionFactory = null;
 
 	private static SessionFactory buildSessionFactory() {

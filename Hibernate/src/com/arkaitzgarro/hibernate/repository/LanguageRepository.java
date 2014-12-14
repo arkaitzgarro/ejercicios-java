@@ -8,14 +8,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.arkaitzgarro.hibernate.model.Language;
-import com.arkaitzgarro.hibernate.util.HibernateUtil;
+import com.arkaitzgarro.hibernate.util.HibernateHelper;
 
 public class LanguageRepository {
 
 	private SessionFactory sessionFactory;
 
 	public LanguageRepository() {
-		sessionFactory = HibernateUtil.getSessionFactory();
+		sessionFactory = HibernateHelper.getSessionFactory();
 	}
 
 	/**
