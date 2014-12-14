@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import com.arkaitzgarro.jdbc.model.Film;
 import com.arkaitzgarro.jdbc.model.factory.FilmFactory;
+import com.arkaitzgarro.jdbc.model.interfaces.IFilm;
 import com.arkaitzgarro.jdbc.model.repository.FilmRepository;
 
 public class FilmTest {
@@ -26,21 +27,21 @@ public class FilmTest {
 
 	@Test
 	public void testFactory() {
-		Film film = filmFactory.create();
+		IFilm film = filmFactory.create();
 
 		assertTrue(film instanceof Film);
 	}
 
 	@Test
 	public void testRepository() {
-		List<Film> films = filmRepository.findAll();
+		List<IFilm> films = filmRepository.findAll();
 		assertNotEquals(0, films.size());
 
-		Film film = filmRepository.findOneById(1);
+		IFilm film = filmRepository.findOneById(1);
 		assertTrue(film instanceof Film);
 		assertEquals(1, film.getId());
 
-		Film newFilm = filmFactory.create();
+		IFilm newFilm = filmFactory.create();
 		newFilm.setTitle("Interstellar");
 		newFilm.setDescription("A group of explorers must travel beyond our solar system in search of a planet that can sustain life. The crew of the Endurance are required to think bigger and go further than any human in history as they embark on an interstellar voyage, into the unknown.");
 		newFilm.setYear(new Date());
@@ -52,7 +53,7 @@ public class FilmTest {
 		newFilm.setTitle("Interstellar 2014");
 		assertTrue(filmRepository.update(newFilm));
 
-		Film otherFilm = filmRepository.findOneById(newFilm.getId());
+		IFilm otherFilm = filmRepository.findOneById(newFilm.getId());
 		assertEquals(newFilm.getId(), otherFilm.getId());
 		assertEquals("Interstellar 2014", otherFilm.getTitle());
 

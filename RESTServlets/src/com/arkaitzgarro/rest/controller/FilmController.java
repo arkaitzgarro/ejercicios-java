@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.arkaitzgarro.jdbc.model.Film;
 import com.arkaitzgarro.jdbc.model.factory.FilmFactory;
+import com.arkaitzgarro.jdbc.model.interfaces.IFilm;
 import com.arkaitzgarro.jdbc.model.repository.FilmRepository;
 import com.google.gson.Gson;
 
@@ -67,7 +67,7 @@ public class FilmController extends HttpServlet {
 		}
 
 		PrintWriter out = response.getWriter();
-		List<Film> list = null;
+		List<IFilm> list = null;
 
 		// String param = UriMatcher.getType(request.getRequestURI());
 		// if (param == UriMatcher.ALL_ROWS) {}
@@ -106,7 +106,7 @@ public class FilmController extends HttpServlet {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
 
 		// Obtener los datos por POST y a–adir una nueva pel’cula
-		Film film = filmFactory.create();
+		IFilm film = filmFactory.create();
 		film.setTitle(request.getParameter("title"));
 		film.setDescription(request.getParameter("description"));
 
@@ -131,7 +131,7 @@ public class FilmController extends HttpServlet {
 	 * @param out
 	 */
 	private void printAllRows(PrintWriter out) {
-		List<Film> list = null;
+		List<IFilm> list = null;
 
 		// Devolver un listado con todas las pel’culas
 		if (filmRepository != null) {
@@ -148,7 +148,7 @@ public class FilmController extends HttpServlet {
 	 * @param out
 	 */
 	private void printOneRow(int id, PrintWriter out) {
-		Film film = null;
+		IFilm film = null;
 
 		// Devolver un listado con todas las pel’culas
 		if (filmRepository != null) {
