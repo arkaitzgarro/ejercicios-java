@@ -16,9 +16,13 @@
 		<!-- SQL dialect -->
 		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		
+		<!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+		
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
 		
 		<mapping resource="com/arkaitzgarro/hibernate/model/Film.hbm.xml" />
+		<mapping class="com.arkaitzgarro.hibernate.model.Language" />
 	</session-factory>
 </hibernate-configuration>

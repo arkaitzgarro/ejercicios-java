@@ -7,6 +7,8 @@ public class Film {
 
 	private String description;
 
+	private Language language;
+
 	public long getId() {
 		return id;
 	}
@@ -29,5 +31,13 @@ public class Film {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(Language language) {
+		this.language = language;
 	}
 }

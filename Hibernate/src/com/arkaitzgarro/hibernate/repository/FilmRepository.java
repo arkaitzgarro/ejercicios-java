@@ -2,42 +2,147 @@ package com.arkaitzgarro.hibernate.repository;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import com.arkaitzgarro.hibernate.model.Film;
 import com.arkaitzgarro.hibernate.util.HibernateUtil;
 
 public class FilmRepository {
 
-	private Session session;
+	private SessionFactory sessionFactory;
 
 	public FilmRepository() {
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		sessionFactory = HibernateUtil.getSessionFactory();
 	}
 
+	/**
+	 * Buscar todas las pel’culas en la base de datos
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
 	public List<Film> findAll() {
 
-		return null;
+		List<Film> list = null;
+
+		try {
+			Session session = sessionFactory.openSession();
+
+			Query q = session.createQuery("from Film");
+			list = (List<Film>) q.list();
+
+			session.close();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+
+			return null;
+		}
+
+		return list;
 	}
 
+	/**
+	 * Buscar una pel’cula por ID
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Film findOneById(long id) {
 
-		return null;
+		Film film = null;
+
+		try {
+			Session session = sessionFactory.openSession();
+
+			film = (Film) session.get(Film.class, id);
+
+			session.close();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+
+			return null;
+		}
+
+		return film;
 	}
 
-	public boolean insert(Film film) {
+	/**
+	 * Buscar pel’culas por nombre o descripci—n
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public List<Film> findByStr(String str) {
+		List<Film> list = null;
 
-		return false;
+		try {
+			Session session = sessionFactory.openSession();
+
+			Query q = session
+					.createQuery("FROM Film film WHERE film.title LIKE :str OR film.description LIKE :str");
+			q.setString("str", "%" + str + "%");
+
+			list = (List<Film>) q.list();
+
+			session.close();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+
+			return null;
+		}
+
+		return list;
 	}
 
-	public boolean update(Film film) {
+	/**
+	 * Guardar (actualiza o inserta) la pel’cula en la base de datos
+	 * 
+	 * @param film
+	 * @return
+	 */
+	public boolean save(Film film) {
 
-		return false;
+		try {
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+
+			session.saveOrUpdate(film);
+
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+
+			return false;
+		}
+
+		return true;
 	}
 
+	/**
+	 * Eliminar una pel’cula de la base de datos
+	 * 
+	 * @param film
+	 * @return
+	 */
 	public boolean delete(Film film) {
 
-		return false;
+		try {
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+
+			session.delete(film);
+
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+
+			return false;
+		}
+
+		return true;
 	}
 
 }

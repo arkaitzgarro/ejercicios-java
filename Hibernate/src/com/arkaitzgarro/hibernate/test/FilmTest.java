@@ -33,17 +33,20 @@ public class FilmTest {
 		assertTrue(film instanceof Film);
 		assertEquals(1, film.getId());
 
+		films = filmRepository.findByStr("DINOSAUR");
+		assertNotEquals(0, films.size());
+
 		Film newFilm = filmFactory.create();
 		newFilm.setTitle("Interstellar");
 		newFilm.setDescription("A group of explorers must travel beyond our solar system in search of a planet that can sustain life. The crew of the Endurance are required to think bigger and go further than any human in history as they embark on an interstellar voyage, into the unknown.");
 		// newFilm.setYear(new Date());
-
+		//
 		assertEquals(0, newFilm.getId());
-		assertTrue(filmRepository.insert(newFilm));
+		assertTrue(filmRepository.save(newFilm));
 		assertNotEquals(0, newFilm.getId());
 
 		newFilm.setTitle("Interstellar 2014");
-		assertTrue(filmRepository.update(newFilm));
+		assertTrue(filmRepository.save(newFilm));
 
 		Film otherFilm = filmRepository.findOneById(newFilm.getId());
 		assertEquals(newFilm.getId(), otherFilm.getId(), 0);
