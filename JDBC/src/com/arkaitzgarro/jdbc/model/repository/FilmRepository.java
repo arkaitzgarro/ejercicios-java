@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.arkaitzgarro.jdbc.db.DataBaseHelper;
 import com.arkaitzgarro.jdbc.model.Film;
+import com.arkaitzgarro.jdbc.model.interfaces.IFilm;
 
 public class FilmRepository {
 	private DataBaseHelper dbHelper;
@@ -22,8 +23,8 @@ public class FilmRepository {
 	 * 
 	 * @return
 	 */
-	public List<Film> findAll() {
-		List<Film> list = new ArrayList<Film>();
+	public List<IFilm> findAll() {
+		List<IFilm> list = new ArrayList<IFilm>();
 		String sql = "SELECT film_id, title, description, release_year FROM film;";
 
 		ResultSet rows = dbHelper.query(sql);
@@ -54,8 +55,8 @@ public class FilmRepository {
 	 * @param id
 	 * @return
 	 */
-	public Film findOneById(long id) {
-		Film film = null;
+	public IFilm findOneById(long id) {
+		IFilm film = null;
 
 		String sql = "SELECT * FROM film  WHERE film_id = ?;";
 		PreparedStatement query = dbHelper.queryPrepared(sql);
@@ -89,7 +90,7 @@ public class FilmRepository {
 	 * @param film
 	 * @return
 	 */
-	public boolean insert(Film film) {
+	public boolean insert(IFilm film) {
 
 		String insert = "INSERT INTO film(title, description, release_year, language_id)"
 				+ " VALUES(?, ?, ?, 1);";
@@ -138,7 +139,7 @@ public class FilmRepository {
 	 * @param film
 	 * @return
 	 */
-	public boolean update(Film film) {
+	public boolean update(IFilm film) {
 		Calendar cal = Calendar.getInstance();
 
 		String sql = "UPDATE film"
@@ -175,7 +176,7 @@ public class FilmRepository {
 	 * @param film
 	 * @return
 	 */
-	public boolean delete(Film film) {
+	public boolean delete(IFilm film) {
 		String sql = "DELETE FROM film WHERE film_id = ?";
 
 		try {

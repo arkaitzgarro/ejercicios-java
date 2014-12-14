@@ -2,7 +2,9 @@ package com.arkaitzgarro.jdbc.model;
 
 import java.util.Date;
 
-public class Film {
+import com.arkaitzgarro.jdbc.model.interfaces.IFilm;
+
+public class Film implements IFilm {
 
 	/**
 	 * Database id
@@ -32,6 +34,7 @@ public class Film {
 	/**
 	 * @return the id
 	 */
+	@Override
 	public long getId() {
 		return id;
 	}
@@ -40,6 +43,7 @@ public class Film {
 	 * @param id
 	 *            the id to set
 	 */
+	@Override
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -47,6 +51,7 @@ public class Film {
 	/**
 	 * @return the title
 	 */
+	@Override
 	public String getTitle() {
 		return title;
 	}
@@ -55,6 +60,7 @@ public class Film {
 	 * @param title
 	 *            the title to set
 	 */
+	@Override
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -62,6 +68,7 @@ public class Film {
 	/**
 	 * @return the description
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -70,6 +77,7 @@ public class Film {
 	 * @param description
 	 *            the description to set
 	 */
+	@Override
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -77,6 +85,7 @@ public class Film {
 	/**
 	 * @return the year
 	 */
+	@Override
 	public Date getYear() {
 		return year;
 	}
@@ -85,6 +94,7 @@ public class Film {
 	 * @param year
 	 *            the year to set
 	 */
+	@Override
 	public void setYear(Date year) {
 		this.year = year;
 	}
@@ -92,6 +102,7 @@ public class Film {
 	/**
 	 * @return the language
 	 */
+	@Override
 	public Language getLanguage() {
 		return language;
 	}
@@ -100,6 +111,7 @@ public class Film {
 	 * @param language
 	 *            the language to set
 	 */
+	@Override
 	public void setLanguage(Language language) {
 		this.language = language;
 	}
