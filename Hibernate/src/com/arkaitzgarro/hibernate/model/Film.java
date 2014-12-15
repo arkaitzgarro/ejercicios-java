@@ -1,5 +1,6 @@
 package com.arkaitzgarro.hibernate.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "film")
 public class Film {
@@ -27,6 +30,10 @@ public class Film {
 
 	@Column(name = "description")
 	private String description;
+
+	@Column(name = "release_year")
+	@Type(type = "date")
+	private Date year;
 
 	@ManyToOne
 	@JoinColumn(name = "language_id", nullable = false)

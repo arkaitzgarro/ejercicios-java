@@ -1,5 +1,7 @@
-package com.arkaitzgarro.hibernate.repository;
+package com.arkaitzgarro.hibernate.repository.abstracts;
 
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -7,65 +9,35 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.arkaitzgarro.hibernate.model.Film;
+import com.arkaitzgarro.hibernate.repository.interfaces.IRepository;
 import com.arkaitzgarro.hibernate.util.HibernateHelper;
 
-public class FilmRepository {
+public abstract class BaseHibernateRepository<T, Id extends Serializable> implements IRepository<T, Id> {
 
+	private Class<T> entityClass;
 	private SessionFactory sessionFactory;
 
-	public FilmRepository() {
+	@SuppressWarnings("unchecked")
+	public BaseHibernateRepository() {
 		try {
 			sessionFactory = HibernateHelper.getSessionFactory();
+			this.entityClass = (Class<T>) ((ParameterizedType) getClass()
+					.getGenericSuperclass()).getActualTypeArguments()[0];
 		} catch(HibernateException e) {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Buscar todas las películas en la base de datos
-	 * 
-	 * @return
-	 */
+	
+	@Override
 	@SuppressWarnings("unchecked")
-	public List<Film> findAll() {
-
+	public T findOneById(Id id) {
 		Session session = null;
-		List<Film> list = null;
+		T obj = null;
 
 		try {
 			session = sessionFactory.openSession();
 
-			Query q = session.createQuery("FROM Film");
-			list = (List<Film>) q.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				session.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Buscar una película por ID
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public Film findOneById(long id) {
-
-		Session session = null;
-		Film film = null;
-
-		try {
-			session = sessionFactory.openSession();
-
-			film = (Film) session.get(Film.class, id);
+			obj = (T) session.get(this.entityClass, id);
 			
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -77,29 +49,20 @@ public class FilmRepository {
 			}
 		}
 
-		return film;
+		return obj;
 	}
-
-	/**
-	 * Buscar películas por nombre o descripción
-	 * 
-	 * @param str
-	 * @return
-	 */
+	
+	@Override
 	@SuppressWarnings("unchecked")
-	public List<Film> findByStr(String str) {
-		
+	public List<T> findAll() {
 		Session session = null;
-		List<Film> list = null;
+		List<T> list = null;
 
 		try {
 			session = sessionFactory.openSession();
 
-			Query q = session
-					.createQuery("FROM Film film WHERE film.title LIKE :str OR film.description LIKE :str");
-			q.setString("str", "%" + str + "%");
-
-			list = (List<Film>) q.list();
+			Query q = session.createQuery("FROM " + this.entityClass.getCanonicalName());
+			list = (List<T>) q.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -113,14 +76,8 @@ public class FilmRepository {
 		return list;
 	}
 
-	/**
-	 * Guardar (actualiza o inserta) la película en la base de datos
-	 * 
-	 * @param film
-	 * @return
-	 */
-	public boolean save(Film film) {
-		
+	@Override
+	public boolean update(T obj) {
 		boolean ok = false;
 		Session session = null;
 
@@ -128,7 +85,7 @@ public class FilmRepository {
 			session = sessionFactory.openSession();
 			
 			session.beginTransaction();
-			session.saveOrUpdate(film);
+			session.saveOrUpdate(obj);
 			session.getTransaction().commit();
 			
 			ok = true;
@@ -146,14 +103,13 @@ public class FilmRepository {
 		return ok;
 	}
 
-	/**
-	 * Eliminar una película de la base de datos
-	 * 
-	 * @param film
-	 * @return
-	 */
-	public boolean delete(Film film) {
+	@Override
+	public boolean insert(T obj) {
+		return this.update(obj);
+	}
 
+	@Override
+	public boolean delete(T obj) {
 		boolean ok = false;
 		Session session = null;
 		
@@ -161,7 +117,7 @@ public class FilmRepository {
 			session = sessionFactory.openSession();
 			
 			session.beginTransaction();
-			session.delete(film);
+			session.delete(obj);
 			session.getTransaction().commit();
 			
 			ok = true;

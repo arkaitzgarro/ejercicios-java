@@ -13,13 +13,13 @@ import javax.persistence.TypedQuery;
 import com.arkaitzgarro.hibernate.repository.interfaces.IRepository;
 import com.arkaitzgarro.hibernate.util.JPAHelper;
 
-public abstract class BaseRepository<T, Id extends Serializable> implements
+public abstract class BaseJPARepository<T, Id extends Serializable> implements
 		IRepository<T, Id> {
 
 	private Class<T> entityClass;
 
 	@SuppressWarnings("unchecked")
-	public BaseRepository() {
+	public BaseJPARepository() {
 		this.entityClass = (Class<T>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}

@@ -43,9 +43,8 @@ public class FilmTest {
 		Film newFilm = filmFactory.create();
 		newFilm.setTitle("Interstellar");
 		newFilm.setDescription("A group of explorers must travel beyond our solar system in search of a planet that can sustain life. The crew of the Endurance are required to think bigger and go further than any human in history as they embark on an interstellar voyage, into the unknown.");
-		newFilm.setLanguage(langRepository.findOneById(1));
-		// newFilm.setYear(new Date());
-		//
+		newFilm.setLanguage(langRepository.findOneById(1L));
+
 		assertEquals(0, newFilm.getId());
 		assertTrue(filmRepository.save(newFilm));
 		assertNotEquals(0, newFilm.getId());

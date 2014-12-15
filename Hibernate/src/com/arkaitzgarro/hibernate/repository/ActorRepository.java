@@ -7,10 +7,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
 import com.arkaitzgarro.hibernate.model.Actor;
-import com.arkaitzgarro.hibernate.repository.abstracts.BaseRepository;
+import com.arkaitzgarro.hibernate.repository.abstracts.BaseJPARepository;
 import com.arkaitzgarro.hibernate.util.JPAHelper;
 
-public class ActorRepository extends BaseRepository<Actor, Long> {
+public class ActorRepository extends BaseJPARepository<Actor, Long> {
 
 	public List<Actor> findByStr(String str) {
 		List<Actor> list = null;
